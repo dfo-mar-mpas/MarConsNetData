@@ -2,8 +2,9 @@
 #'
 #' @param bioregion name of the bioregion to match from the `NAME_E` column of: https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0
 #'
-#' @return
+#' @return data.frame
 #' @export
+#' @importFrom rlang .data
 #'
 #' @examples
 #' \dontrun{
@@ -21,8 +22,8 @@ getobisdata <- function(bioregion = "Scotian Shelf"){
     sf::st_make_valid()
 
   grouped_areas <- areas |>
-    dplyr::group_by(NAME_E) |>
-    dplyr::reframe(geoms=sf::st_union(geoms)) |>
+    dplyr::group_by(.data$NAME_E) |>
+    dplyr::reframe(geoms=sf::st_union(.data$geoms)) |>
     sf::st_as_sf() |>
     sf::st_make_valid()
 
@@ -39,7 +40,7 @@ getobisdata <- function(bioregion = "Scotian Shelf"){
                  remove = FALSE) |>
     sf::st_filter(grouped_areas$geoms) |>
     as.data.frame() |>
-    dplyr::select(-geometry)
+    dplyr::select(-.data$geometry)
 
 }
 
