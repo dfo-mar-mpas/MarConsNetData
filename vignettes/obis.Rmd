@@ -1,0 +1,55 @@
+---
+title: "obis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{obis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MarConsNetData)
+```
+
+
+```{r}
+bioregion <- get_bioregion()
+areas <- get_CPCAD_areas(bioregion,zones=FALSE)
+
+
+fn <- "obis_bioregion.RDS"
+if(!file.exists(fn)){
+  obis_bioregion <- get_obis_data(bioregion)
+  saveRDS(obis_bioregion,fn)
+} else {
+  readRDS(fn)
+}
+
+fn <- "obis_areas.RDS"
+if(!file.exists(fn)){
+  obis_areas <- get_obis_data(areas)
+  saveRDS(obis_areas,fn)
+} else {
+  readRDS(fn)
+}
+
+```
+```{r}
+obis_areas <- obis |>
+    sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
+                 crs = 4326,
+                 remove = FALSE) |> 
+  sf::st_intersection(areas)
+
+obis_areas <- obis_areas |> 
+  as.data.frame() |> 
+  select(-geometry)
+```
+
