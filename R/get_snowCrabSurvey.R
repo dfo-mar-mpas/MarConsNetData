@@ -26,7 +26,8 @@
 
 get_snowCrabSurvey <- function(taxize=FALSE, MPA=NULL) {
   load('../stannsbank_mpa/data/CrabSurvey/2023CrabSurveyDat.RData') #FIXME
-  id <- 1093 # Note this is hard coded
+  load(file.path(system.file(package="MarConsNetData"),"data", "dataTable.rda"))
+  id <- dataTable$id[which(dataTable$get_function == sys.call()[[1]])]
   df <- sab[,c("LONGITUDE", "LATITUDE", "SPEC", "COMM", "year")]
   df <- df[-(which(is.na(df$SPEC))),]
   df$SPEC[which(df$SPEC == "")] <- 0
