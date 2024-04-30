@@ -1,4 +1,4 @@
-#' Get data for the snow crab survey
+#' Get data for the snow crab survey (1093)
 #'
 #' This function obtains the species counts identified with the snow crab survey
 #'
@@ -10,12 +10,11 @@
 #' `BancDesAmericains`, `basinHead`, `eastport`, `gilbertBay`, `gully`,
 #' `laurentianChannel`, `musquashEstuary`, or `stAnnsBank`. If `NULL`
 #' all data plotted
-#'
+#' @export
 #' @importFrom readxl read_excel
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr summarise count group_by mutate mutate_all n
-#' @importFrom taxize tax_name
 #' @importFrom MarConsNetAnalysis taxize_data
 #' @importFrom utils read.csv read.table
 #'
