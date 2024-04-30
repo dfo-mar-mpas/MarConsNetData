@@ -7,7 +7,7 @@
 get_obis_data(areas, geom_col = "geoms", name_col = "NAME_E")
 }
 \arguments{
-\item{areas}{}
+\item{areas}{this is a place holder for the R check}
 }
 \value{
 data.frame

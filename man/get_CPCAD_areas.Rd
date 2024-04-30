@@ -7,9 +7,9 @@
 get_CPCAD_areas(bioregion, zones = FALSE)
 }
 \arguments{
-\item{bioregion}{sf data.frame of the bioregion. You can use `MarConsNetData::get_bioregion()` to download the bioregion of your choice.}
+\item{bioregion}{sf data.frame of the bioregion. You can use \code{MarConsNetData::get_bioregion()} to download the bioregion of your choice.}
 
-\item{zones}{logical that indicates if zones should be returned (`TRUE`) or, as default, unioned (`FALSE`). If zones is `FALSE`, the sf data.frame is grouped by `NAME_E` and the geoms are unioned resulting in a complete loss of other columns.}
+\item{zones}{logical that indicates if zones should be returned (\code{TRUE}) or, as default, unioned (\code{FALSE}). If zones is \code{FALSE}, the sf data.frame is grouped by \code{NAME_E} and the geoms are unioned resulting in a complete loss of other columns.}
 }
 \description{
 Title

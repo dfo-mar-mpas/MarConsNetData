@@ -1,10 +1,13 @@
 #' get_obis_data
 #'
-#' @param areas
+#' @param areas this is a place holder for the R check
 #'
 #' @return data.frame
 #' @export
 #' @importFrom rlang .data
+#' @importFrom robis occurrence
+#' @importFrom dplyr mutate bind_rows select
+#' @importFrom sf st_as_sf st_filter
 #'
 #' @examples
 #' \dontrun{

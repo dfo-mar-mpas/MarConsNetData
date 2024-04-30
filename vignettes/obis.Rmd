@@ -19,7 +19,7 @@ library(MarConsNetData)
 ```
 
 
-```{r}
+```{r, eval=FALSE}
 bioregion <- get_bioregion()
 areas <- get_CPCAD_areas(bioregion,zones=FALSE)
 
@@ -41,7 +41,7 @@ if(!file.exists(fn)){
 }
 
 ```
-```{r}
+```{r, eval=FALSE}
 obis_areas <- obis |>
     sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
                  crs = 4326,
