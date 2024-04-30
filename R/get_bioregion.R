@@ -3,6 +3,7 @@
 #' @param bioregion name of the bioregion to match from the `NAME_E` column from [Open Data](https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0). Default is `"Scotian Shelf"`
 #'
 #' @return sf data.frame
+#' @importFrom arcpullr get_spatial_layer
 #' @export
 #'
 #' @examples

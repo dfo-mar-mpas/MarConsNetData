@@ -1,22 +1,17 @@
 Package: MarConsNetData
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: MIT + file LICENSE
+Title: Get data for sampling efforts in MPAs
+Version: 0.0.0.9000
+Author:
+ c(person(given="Jaimie", family="Harbin", email="jaimie.harbin@dfo-mpo.gc.ca", role=c("aut"),
+        comment=c(ORCID="https://orcid.org/0000-0003-3774-3732")),person(given="Remi", family="Diagle", email="remi.diagle@dfo-mpo.gc.ca", role=c("aut"),
+        comment=c(ORCID="https://orcid.org/0000-0001-8832-4189"))) 
+Maintainer: Jaimie Harbin <jaimie.harbin@dfo-mpo.gc.ca>
+Description: Get data for sampling efforts in MPAs
+Imports: readxl, magrittr, tidyr, dplyr, taxize, utils, shiny, ggplot2, leaflet, grDevices, arcpullr, sf, rlang, robis
+License: GPL (>= 2)
+Depends: R (>= 3.5.0)
 Encoding: UTF-8
-LazyData: true
-Imports: 
-    arcpullr,
-    dplyr,
-    rlang,
-    robis,
-    sf
-RoxygenNote: 7.3.1
-Suggests: 
-    knitr,
-    rmarkdown
-VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+URL: https://github.com/dfo-mar-mpas/MarConsNetData
+BugReports: https://github.com/dfo-mar-mpas/MarConsNetData/issues
