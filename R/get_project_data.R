@@ -29,7 +29,7 @@
 #' @author Jaimie Harbin and Remi Daigle
 #' @export
 
-getAppData <- function(ids=NULL, titles=NULL, taxize=FALSE, MPA=NULL) {
+get_project_data <- function(ids=NULL, titles=NULL, taxize=FALSE, MPA=NULL) {
   lat_rounded <- lon_rounded <- n <- sab <- site <- subphylum <- NULL
   if (is.null(ids) && is.null(titles)) {
     stop("Must provide aand ids argument")
