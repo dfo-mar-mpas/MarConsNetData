@@ -14,3 +14,8 @@ get_CPCAD_areas(bioregion, zones = FALSE)
 \description{
 Title
 }
+\examples{
+bioregion <- get_bioregion()
+MPAs <- get_CPCAD_areas(bioregions,  zones = FALSE)
+
+}
