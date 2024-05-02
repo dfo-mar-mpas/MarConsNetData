@@ -16,7 +16,6 @@
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr summarise count group_by mutate mutate_all n
-#' @importFrom MarConsNetAnalysis taxize_data
 #' @importFrom utils read.csv read.table
 #' @export
 #' @return dataframe
@@ -84,7 +83,7 @@ project_eDNAMetabarcoding <- function(taxize=FALSE, MPA=NULL) {
   rownames(df) <- NULL
 
   if (!(is.null(taxize)) && taxize) {
-    df <- MarConsNetAnalysis::taxize_data(df)
+    df <- taxize_data(df)
     df <- cbind(id = id, df)
   } else {
     # Not taxize

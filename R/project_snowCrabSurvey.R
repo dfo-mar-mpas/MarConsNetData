@@ -15,7 +15,6 @@
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr summarise count group_by mutate mutate_all n
-#' @importFrom MarConsNetAnalysis taxize_data
 #' @importFrom utils read.csv read.table
 #'
 #' @return dataframe
@@ -58,7 +57,7 @@ project_snowCrabSurvey <- function(taxize=FALSE, MPA=NULL) {
   df <- df[c(which(names(df) == "lat"), which(names(df) == "lon"), setdiff(1:ncol(df), c(which(names(df) == "lat"), which(names(df) == "lon"))))]
 
   if (!(is.null(taxize)) && taxize) {
-    df <- MarConsNetAnalysis::taxize_data(df)
+    df <- taxize_data(df)
     df <- cbind(id = id, df)
   } else {
     # Not taxize
