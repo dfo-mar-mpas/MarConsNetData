@@ -12,6 +12,6 @@
 #' }
 data_SAR_CH <- function(bioregion){
   arcpullr::get_layer_by_poly("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/DFO_SARA_CriticalHabitat/MapServer/0",
-                              geometry = sf::st_convex_hull(bioregion)) |>
+                              geometry = sf::st_convex_hull(sf::st_transform(bioregion,3857))) |>
     sf::st_filter(bioregion)
 }
