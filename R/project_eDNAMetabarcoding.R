@@ -1,7 +1,7 @@
-#' Get data for the optimizing eDNA survey (1491)
+#' Get data for the eDNA Metabarcoding (642)
 #'
 #' This function obtains the species counts identified with the
-#' optimizing eDNA survey.
+#'  eDNA Metabarcoding
 #'
 #' @param taxize a Boolean indicating if the data frame names should
 #' be categorized by subphylum. If `FALSE` the species names will be
@@ -11,15 +11,21 @@
 #' `BancDesAmericains`, `basinHead`, `eastport`, `gilbertBay`, `gully`,
 #' `laurentianChannel`, `musquashEstuary`, or `stAnnsBank`. If `NULL`
 #' all data plotted
-#' @export
+#'
 #' @importFrom readxl read_excel
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr summarise count group_by mutate mutate_all n
 #' @importFrom MarConsNetAnalysis taxize_data
 #' @importFrom utils read.csv read.table
+#' @export
+#' @return dataframe
+#' @examples
+#' \dontrun{
+#' data <- project_eDNAMetabarcoding(taxize=TRUE)
+#' }
 
-get_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
+project_eDNAMetabarcoding <- function(taxize=FALSE, MPA=NULL) {
   load(file.path(system.file(package="MarConsNetData"),"data", "dataTable.rda"))
   id <- dataTable$id[which(dataTable$get_function == sys.call()[[1]])]
   eDNA <- read_excel("../SABapp/data/eDNA/eDNA_WaterSamples_2022.xlsx", sheet = 3) #FIXME
@@ -31,9 +37,8 @@ get_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
   latitude <- lat + (latMinutes / 60)
   longitude <- lon + (lonMinutes/ 60)
 
-  ASV <- read.table("../SABapp/data/eDNA/COI_FilteredASVtable.txt",header = TRUE, sep = "\t") #FIXME
-  names(ASV)[1] <- "Species" #FIXME
-
+  # Read the file using read.table
+    ASV <- read.table("../SABapp/data/eDNA/16S_FilteredASVtable.txt",header = TRUE, sep = "\t") #FIXME
   if ("Other eukaryotes" %in% ASV$Species) {
     ASV <- ASV[-which(ASV$Species == "Other eukaryotes"),]
   }
@@ -78,8 +83,6 @@ get_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
   df <- cbind(lat = lat, lon=lon, DF)
   rownames(df) <- NULL
 
-
-
   if (!(is.null(taxize)) && taxize) {
     df <- MarConsNetAnalysis::taxize_data(df)
     df <- cbind(id = id, df)
@@ -100,3 +103,4 @@ get_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
   }
 
 }
+

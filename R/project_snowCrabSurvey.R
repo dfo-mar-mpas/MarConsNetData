@@ -21,10 +21,10 @@
 #' @return dataframe
 #' @examples
 #' \dontrun{
-#' data <- get_snowCrabSurvey(taxize=TRUE)
+#' data <- project_snowCrabSurvey(taxize=TRUE)
 #' }
 
-get_snowCrabSurvey <- function(taxize=FALSE, MPA=NULL) {
+project_snowCrabSurvey <- function(taxize=FALSE, MPA=NULL) {
   load('../stannsbank_mpa/data/CrabSurvey/2023CrabSurveyDat.RData') #FIXME
   load(file.path(system.file(package="MarConsNetData"),"data", "dataTable.rda"))
   id <- dataTable$id[which(dataTable$get_function == sys.call()[[1]])]
