@@ -30,7 +30,7 @@ analysis of the Marine Protect Areas (MPAs).
 }
 \examples{
 \dontrun{
-data <- get_app_data(id=1093, taxize=FALSE)
+data <- get_project_data(id=1093, taxize=FALSE)
 }
 }
 \author{
