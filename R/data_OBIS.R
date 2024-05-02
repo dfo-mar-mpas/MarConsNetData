@@ -2,7 +2,7 @@
 #'
 #' This function obtains OBIS data.
 #'
-#' @param areas sf data.frame of the bio region. You can use `MarConsNetData::get_bioregion()` to download the bio region of your choice.
+#' @param areas sf data.frame of the bio region. You can use `MarConsNetData::data_bioregion()` to download the bio region of your choice.
 #' @param geom_col name of the geometry column
 #' @param name_col name of a column to obtain in the obis data set
 #' @return data.frame
@@ -14,10 +14,10 @@
 #' @examples
 #' \dontrun{
 #' bioregion <- data_bioregion()
-#' obis <- data_obis(bioregion)
+#' obis <- data_OBIS(bioregion)
 #' }
 
-data_obis <- function(areas, geom_col = "geoms", name_col = "NAME_E"){
+data_OBIS <- function(areas, geom_col = "geoms", name_col = "NAME_E"){
   obis_occ <- apply(areas,1,function(a){
     occ <- robis::occurrence(geometry = sf::st_as_text(sf::st_as_sfc(sf::st_bbox(a[[geom_col]])))) |>
       dplyr::mutate(CPCAP_NAME_E = a[[name_col]])
