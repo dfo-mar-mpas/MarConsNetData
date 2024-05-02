@@ -7,7 +7,7 @@
 #'
 #' @importFrom methods new
 #' @name MarConsNetData-package
-#' @docType package
+#' @docType _PACKAGE
 NULL
 
 #' A look up table for data

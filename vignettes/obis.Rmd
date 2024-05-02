@@ -20,13 +20,13 @@ library(MarConsNetData)
 
 
 ```{r, eval=FALSE}
-bioregion <- get_bioregion()
-areas <- get_CPCAD_areas(bioregion,zones=FALSE)
+bioregion <- data_bioregion()
+areas <- data_CPCAD_areas(bioregion,zones=FALSE)
 
 
 fn <- "obis_bioregion.RDS"
 if(!file.exists(fn)){
-  obis_bioregion <- get_obis_data(bioregion)
+  obis_bioregion <- data_obis_data(bioregion)
   saveRDS(obis_bioregion,fn)
 } else {
   readRDS(fn)
@@ -34,7 +34,7 @@ if(!file.exists(fn)){
 
 fn <- "obis_areas.RDS"
 if(!file.exists(fn)){
-  obis_areas <- get_obis_data(areas)
+  obis_areas <- data_obis_data(areas)
   saveRDS(obis_areas,fn)
 } else {
   readRDS(fn)
