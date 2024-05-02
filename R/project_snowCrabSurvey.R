@@ -55,7 +55,6 @@ project_snowCrabSurvey <- function(taxize=FALSE, MPA=NULL) {
   df$lat <- as.numeric(sapply(strsplit(as.character(df$site), ","), "[", 2))
   df <- df[,-1] #removing "0"
   df <- df[c(which(names(df) == "lat"), which(names(df) == "lon"), setdiff(1:ncol(df), c(which(names(df) == "lat"), which(names(df) == "lon"))))]
-
   if (!(is.null(taxize)) && taxize) {
     df <- taxize_data(df)
     df <- cbind(id = id, df)
