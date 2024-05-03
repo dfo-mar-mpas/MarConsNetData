@@ -1,0 +1,10 @@
+pandoc: 3.1.11
+pkgdown: 2.0.9
+pkgdown_sha: ~
+articles:
+  obis: obis.html
+last_built: 2024-05-03T18:27Z
+urls:
+  reference: https://dfo-mar-mpas.github.io/MarConsNetData/reference
+  article: https://dfo-mar-mpas.github.io/MarConsNetData/articles
+
