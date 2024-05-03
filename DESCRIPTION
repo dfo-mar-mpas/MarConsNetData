@@ -3,7 +3,7 @@ Title: Get data for sampling efforts in MPAs
 Version: 0.0.0.9000
 Author:
  c(person(given="Jaimie", family="Harbin", email="jaimie.harbin@dfo-mpo.gc.ca", role=c("aut"),
-        comment=c(ORCID="https://orcid.org/0000-0003-3774-3732")),person(given="Remi", family="Diagle", email="remi.diagle@dfo-mpo.gc.ca", role=c("aut"),
+        comment=c(ORCID="https://orcid.org/0000-0003-3774-3732")),person(given="Remi", family="Daigle", email="remi.daigle@dfo-mpo.gc.ca", role=c("aut"),
         comment=c(ORCID="https://orcid.org/0000-0001-8832-4189"))) 
 Maintainer: Jaimie Harbin <jaimie.harbin@dfo-mpo.gc.ca>
 Description: Get data for sampling efforts in MPAs
