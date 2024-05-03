@@ -15,3 +15,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 URL: https://github.com/dfo-mar-mpas/MarConsNetData, https://dfo-mar-mpas.github.io/MarConsNetData/
 BugReports: https://github.com/dfo-mar-mpas/MarConsNetData/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
