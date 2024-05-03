@@ -86,7 +86,7 @@
 <span></span>
 <span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="st">"obis_bioregion.RDS"</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">obis_bioregion</span> <span class="op">&lt;-</span> <span class="fu">data_OBIS</span><span class="op">(</span><span class="va">bioregion</span><span class="op">)</span></span>
+<span>  <span class="va">obis_bioregion</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/data_OBIS.html">data_OBIS</a></span><span class="op">(</span><span class="va">bioregion</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">obis_bioregion</span>,<span class="va">fn</span><span class="op">)</span></span>
 <span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span></span>
@@ -94,7 +94,7 @@
 <span></span>
 <span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="st">"obis_areas.RDS"</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">obis_areas</span> <span class="op">&lt;-</span> <span class="fu">data_OBIS</span><span class="op">(</span><span class="va">areas</span><span class="op">)</span></span>
+<span>  <span class="va">obis_areas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/data_OBIS.html">data_OBIS</a></span><span class="op">(</span><span class="va">areas</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">obis_areas</span>,<span class="va">fn</span><span class="op">)</span></span>
 <span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span></span>
