@@ -5,3 +5,5 @@
 inst/doc
 vignettes/*.RDS
 docs
+/doc/
+/Meta/
