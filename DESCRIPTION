@@ -6,8 +6,8 @@ Author:
         comment=c(ORCID="https://orcid.org/0000-0003-3774-3732")),person(given="Remi", family="Daigle", email="remi.daigle@dfo-mpo.gc.ca", role=c("aut"),
         comment=c(ORCID="https://orcid.org/0000-0001-8832-4189"))) 
 Maintainer: Jaimie Harbin <jaimie.harbin@dfo-mpo.gc.ca>
-Description: Get data for sampling efforts in MPAs
-Imports: readxl, magrittr, tidyr, dplyr, taxize, utils, shiny, ggplot2, leaflet, grDevices, arcpullr, sf, rlang, robis, methods
+Description: Get data for sampling efforts in MPAs.
+Imports: readxl, magrittr, tidyr, dplyr, taxize, utils, arcpullr, sf, rlang, robis, methods
 License: GPL (>= 2)
 Depends: R (>= 3.5.0)
 Encoding: UTF-8
