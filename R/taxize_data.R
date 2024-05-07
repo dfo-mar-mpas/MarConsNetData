@@ -7,6 +7,7 @@
 #' @export
 
 taxize_data <- function(df=NULL) {
+  lat <- lon <- lat_rounded <- lon_rounded <- subphylum <- NULL
   if ("species" %in% names(df)) {
     SPECIES <- unique(df$species)
   } else {

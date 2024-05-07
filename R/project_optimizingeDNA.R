@@ -19,6 +19,8 @@
 #' @importFrom utils read.csv read.table
 
 project_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
+  dataTable <- lat_rounded <- lon_rounded <- species <- NULL
+
   load(file.path(system.file(package="MarConsNetData"),"data", "dataTable.rda"))
   id <- dataTable$id[which(dataTable$get_function == sys.call()[[1]])]
   eDNA <- read_excel("../SABapp/data/eDNA/eDNA_WaterSamples_2022.xlsx", sheet = 3) #FIXME
