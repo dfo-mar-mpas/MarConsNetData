@@ -94,7 +94,7 @@ project_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
         summarise(count = n())%>%
         pivot_wider(names_from = species, values_from = count, values_fill = 0)
       DF2 <- cbind(id = id, DF2)
-      LIST[[II]] <- DF2
+      #LIST[[II]] <- DF2
     } else {
       df <- cbind(id = id, df)
     }
