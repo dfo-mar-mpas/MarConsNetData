@@ -47,7 +47,6 @@ get_project_data <- function(ids=NULL, titles=NULL, taxize=FALSE, MPA=NULL) {
   } else {
     NAMES <- ids
   }
-  #browser()
   for (II in seq_along(NAMES)) {
     if (is.null(ids)) {
       title <- NAMES[II]
