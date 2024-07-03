@@ -64,6 +64,12 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
   minLine <- which(grepl("Conservation Objectives", lines[[1]]))+1
   maxLine <- which(grepl("Prohibitions", lines[[1]]))-1
 
+  # Unique for bansDesAmericains
+  if (area == "bancsDesAmericains") {
+    minLine <- which(lines[[1]] == "            <p>The conservation objectives for the Banc-des-Américains Marine Protected are to:</p>\r")+2
+    maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
+  }
+
   final <- lines[[1]][minLine:maxLine]
   if (any(final == "        </ul>\r" )) {
     final <- final[-which(final == "        </ul>\r")]
