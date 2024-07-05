@@ -108,7 +108,7 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
     final <- sub("^[^>]*>", "", final) # remove everything before first >
   }
 
-  final <- sapply(final, function(x) paste0("- ", x, "\n"))
+  #final <- sapply(final, function(x) paste0("- ", x, "\n"))
 
   return(final)
 }
