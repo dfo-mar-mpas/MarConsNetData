@@ -34,7 +34,7 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
   }
 
   if (type == "network") {
-    stop("halle")
+  urls <- "https://www.dfo-mpo.gc.ca/oceans/networks-reseaux/scotian-shelf-plateau-neo-ecossais-bay-baie-fundy/development-developpement-eng.html"
   } else if (type == "site") {
   if (area == "stAnnsBank") {
     u <- "stanns-sainteanne"
@@ -56,6 +56,8 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
 
   urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
   } # End Site
+
+#The BIG 3
 
   pages <- lapply(urls,read_html)
   response <- lapply(urls, GET)
@@ -98,7 +100,12 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
     final <- final[-which(final == "            ")]
   }
   } else if (type == "network") {
-    stop("halle")
+    minLine <- which(grepl("The objectives for the conservation", lines[[1]],ignore.case = TRUE))+2
+    maxLine <- which(grepl("Selecting conservation priorities", lines[[1]], ignore.case = TRUE))-2
+    final <- lines[[1]][minLine:maxLine]
+
+    final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
+    final <- sub("^[^>]*>", "", final) # remove everything before first >
   }
 
   final <- sapply(final, function(x) paste0("- ", x, "\n"))
