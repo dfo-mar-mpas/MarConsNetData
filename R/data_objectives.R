@@ -61,6 +61,7 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
   response <- lapply(urls, GET)
   lines <- strsplit(content(response[[1]], as="text"), "\n")
 
+  if (type == "site") {
   minLine <- which(grepl("Conservation Objectives", lines[[1]]))+1
   maxLine <- which(grepl("Prohibitions", lines[[1]]))-1
 
@@ -95,6 +96,9 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
 
   if (any(final == "            ")) {
     final <- final[-which(final == "            ")]
+  }
+  } else if (type == "network") {
+    stop("halle")
   }
 
   final <- sapply(final, function(x) paste0("- ", x, "\n"))
