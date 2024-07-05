@@ -3,7 +3,7 @@
 #' This function gets site and network level objectives for the
 #' Canadian protected and conserved areas in the Scotian Shelf bio region.
 #'
-#' @param type argument of either site or network indicating which objectives to obtain
+#' @param type argument of either `site` or `network` indicating which objectives to obtain
 #' @param area a name of an area of which to obtain the objectives from. Options include
 #' `stAnnsBank`, `musquash`, `laurentianChannel`, `gully`, `gilbert`, `eastport`,
 #' `basinHead`, `bancsDesAmericains`
@@ -96,5 +96,8 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
   if (any(final == "            ")) {
     final <- final[-which(final == "            ")]
   }
+
+  final <- sapply(final, function(x) paste0("- ", x, "\n"))
+
   return(final)
 }
