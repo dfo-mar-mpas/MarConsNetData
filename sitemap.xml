@@ -1,72 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/404.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/articles/obis.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/index.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/MarConsNetData-package.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/dataTable.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_CPCAD_areas.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_EBSA.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_KBA.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_OBIS.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_SAR_CH.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_biophysical_units.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_bioregion.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_draft_areas.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_geomorphic_units.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_objectives.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/get_project_data.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_eDNAMetabarcoding.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_optimizingeDNA.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_snowCrabSurvey.html</loc>
-  </url>
-  <url>
-    <loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/taxize_data.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/404.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/articles/index.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/articles/obis.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/authors.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/index.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/MarConsNetData-package.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/dataTable.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_CPCAD_areas.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_EBSA.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_KBA.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_OBIS.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_SAR_CH.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_biophysical_units.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_bioregion.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_draft_areas.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_geomorphic_units.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_objectives.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/get_project_data.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/index.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_eDNAMetabarcoding.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_optimizingeDNA.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_snowCrabSurvey.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/taxize_data.html</loc></url>
 </urlset>
+
