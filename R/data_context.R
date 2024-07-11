@@ -1,6 +1,6 @@
-#' FIXME!!!! Get Objectives from Canadian Protected and Conserved Areas
+#' Get Context from Canadian Protected and Conserved Areas
 #'
-#' This function gets site and network level objectives for the
+#' This function gets site and network level context for the
 #' Canadian protected and conserved areas in the Scotian Shelf bio region.
 #'
 #' @param type argument of either `site` or `network` indicating which objectives to obtain
@@ -13,12 +13,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' stAnnsBankObjectives <- data_objectives(type="site", area="stAnnsBank")
+#' stAnnsBankContext <- data_context(type="site", area="stAnnsBank")
 #' }
 #'
 #' @return a "sf" "dataframe" object
 #'
-data_objectives <- function(type=NULL, area="stAnnsBank") {
+data_context <- function(type=NULL, area="stAnnsBank") {
   if (is.null(type)) {
     stop("Must provide a type argument of either network or site")
   }
@@ -64,49 +64,50 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
   lines <- strsplit(content(response[[1]], as="text"), "\n")
 
   if (type == "site") {
-    minLine <- which(grepl("Conservation Objectives", lines[[1]], ignore.case=TRUE))+1
-    maxLine <- which(grepl("Prohibitions", lines[[1]], ignore.case=TRUE))-1
-
-    # Unique for bansDesAmericains
-    if (area == "bancsDesAmericains") {
-      minLine <- which(lines[[1]] == "            <p>The conservation objectives for the Banc-des-Américains Marine Protected are to:</p>\r")+2
-      maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
+    minLine <- which(grepl("Location", lines[[1]], ignore.case=TRUE))
+    maxLine <- which(grepl("Conservation Objectives", lines[[1]], ignore.case=TRUE))[1]-1
     }
 
-    final <- lines[[1]][minLine:maxLine]
-    if (any(final == "        </ul>\r" )) {
+  final <- lines[[1]][minLine:maxLine]
+
+    #if (any(final == "        </ul>\r" )) {
       final <- final[-which(final == "        </ul>\r")]
     }
-    if (any(final == "        <ul>\r")) {
+    #if (any(final == "        <ul>\r")) {
       final <- final[-which(final == "        <ul>\r")]
     }
 
-    if (any(final == "          <ul>\r")) {
+    #if (any(final == "          <ul>\r")) {
       final <- final[-which(final == "          <ul>\r")]
     }
 
-    if (any(final == "          </ul>\r")) {
+    #if (any(final == "          </ul>\r")) {
       final <- final[-which(final == "          </ul>\r")]
     }
 
     final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
     final <- sub("^[^>]*>", "", final) # remove everything before first >
 
-    if (any(final == "          ")) {
+    #if (any(final == "          ")) {
       final <- final[-which(final == "          ")]
     }
 
-    if (any(final == "            ")) {
+    #if (any(final == "            ")) {
       final <- final[-which(final == "            ")]
     }
-  } else if (type == "network") {
-    minLine <- which(grepl("The objectives for the conservation", lines[[1]],ignore.case = TRUE))+2
-    maxLine <- which(grepl("Selecting conservation priorities", lines[[1]], ignore.case = TRUE))-2
-    final <- lines[[1]][minLine:maxLine]
 
+  } else if (type == "network") {
+    minLine <- which(grepl("Creating the network plan", lines[[1]],ignore.case = TRUE))+1
+    maxLine <- which(grepl("Setting conservation objectives", lines[[1]], ignore.case = TRUE))-1
+
+    final <- lines[[1]][minLine:maxLine]
 
     final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
     final <- sub("^[^>]*>", "", final) # remove everything before first >
+  }
+
+    if (any(final == "        ")) {
+       final <- final[-which(final == "        ")]
   }
 
   #final <- sapply(final, function(x) paste0("- ", x, "\n"))
