@@ -66,35 +66,14 @@ data_context <- function(type=NULL, area="stAnnsBank") {
   if (type == "site") {
     minLine <- which(grepl("Location", lines[[1]], ignore.case=TRUE))
     maxLine <- which(grepl("Conservation Objectives", lines[[1]], ignore.case=TRUE))[1]-1
-    }
 
   final <- lines[[1]][minLine:maxLine]
 
-    #if (any(final == "        </ul>\r" )) {
-      final <- final[-which(final == "        </ul>\r")]
-    }
-    #if (any(final == "        <ul>\r")) {
-      final <- final[-which(final == "        <ul>\r")]
-    }
 
-    #if (any(final == "          <ul>\r")) {
-      final <- final[-which(final == "          <ul>\r")]
-    }
-
-    #if (any(final == "          </ul>\r")) {
-      final <- final[-which(final == "          </ul>\r")]
-    }
 
     final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
     final <- sub("^[^>]*>", "", final) # remove everything before first >
 
-    #if (any(final == "          ")) {
-      final <- final[-which(final == "          ")]
-    }
-
-    #if (any(final == "            ")) {
-      final <- final[-which(final == "            ")]
-    }
 
   } else if (type == "network") {
     minLine <- which(grepl("Creating the network plan", lines[[1]],ignore.case = TRUE))+1
