@@ -28,7 +28,7 @@ project_eDNAMetabarcoding <- function(taxize=FALSE, MPA=NULL) {
   dataTable <- lat_rounded <- lon_rounded <- species <- NULL
   load(file.path(system.file(package="MarConsNetData"),"data", "dataTable.rda"))
   id <- dataTable$id[which(dataTable$get_function == sys.call()[[1]])]
-  eDNA <- read_excel("../SABapp/data/eDNA/eDNA_WaterSamples_2022.xlsx", sheet = 3) #FIXME
+  eDNA <- read_excel("C:/Users/HarbinJ/Documents/GitHub/SABapp/data/eDNA/eDNA_WaterSamples_2022.xlsx", sheet = 3) #FIXME
   sampleId <- eDNA$SampleID
   lon <- eDNA$Long
   lonMinutes <- eDNA$...12
@@ -38,7 +38,7 @@ project_eDNAMetabarcoding <- function(taxize=FALSE, MPA=NULL) {
   longitude <- lon + (lonMinutes/ 60)
 
   # Read the file using read.table
-    ASV <- read.table("../SABapp/data/eDNA/16S_FilteredASVtable.txt",header = TRUE, sep = "\t") #FIXME
+    ASV <- read.table("C:/Users/HarbinJ/Documents/GitHub/SABapp/data/eDNA/16S_FilteredASVtable.txt",header = TRUE, sep = "\t") #FIXME
   if ("Other eukaryotes" %in% ASV$Species) {
     ASV <- ASV[-which(ASV$Species == "Other eukaryotes"),]
   }

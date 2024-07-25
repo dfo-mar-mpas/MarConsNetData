@@ -26,7 +26,7 @@
 project_snowCrabSurvey <- function(taxize=FALSE, MPA=NULL) {
   dataTable <- lat_rounded <- lon_rounded <- species <- sab <- site <- species <- lat <- lon <- NULL
 
-  load('../stannsbank_mpa/data/CrabSurvey/2023CrabSurveyDat.RData') #FIXME
+  load('C:/Users/HarbinJ/Documents/GitHub/stannsbank_mpa/data/CrabSurvey/2023CrabSurveyDat.RData') #FIXME
   load(file.path(system.file(package="MarConsNetData"),"data", "dataTable.rda"))
   id <- dataTable$id[which(dataTable$get_function == sys.call()[[1]])]
   df <- sab[,c("LONGITUDE", "LATITUDE", "SPEC", "COMM", "year")]

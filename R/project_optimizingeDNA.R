@@ -23,7 +23,7 @@ project_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
 
   load(file.path(system.file(package="MarConsNetData"),"data", "dataTable.rda"))
   id <- dataTable$id[which(dataTable$get_function == sys.call()[[1]])]
-  eDNA <- read_excel("../SABapp/data/eDNA/eDNA_WaterSamples_2022.xlsx", sheet = 3) #FIXME
+  eDNA <- read_excel("C:/Users/HarbinJ/Documents/GitHub/SABapp/data/eDNA/eDNA_WaterSamples_2022.xlsx", sheet = 3) #FIXME
   sampleId <- eDNA$SampleID
   lon <- eDNA$Long
   lonMinutes <- eDNA$...12
@@ -32,7 +32,7 @@ project_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
   latitude <- lat + (latMinutes / 60)
   longitude <- lon + (lonMinutes/ 60)
 
-  ASV <- read.table("../SABapp/data/eDNA/COI_FilteredASVtable.txt",header = TRUE, sep = "\t") #FIXME
+  ASV <- read.table("C:/Users/HarbinJ/Documents/GitHub/SABapp/data/eDNA/COI_FilteredASVtable.txt",header = TRUE, sep = "\t") #FIXME
   names(ASV)[1] <- "Species" #FIXME
 
   if ("Other eukaryotes" %in% ASV$Species) {
