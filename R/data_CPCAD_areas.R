@@ -23,7 +23,7 @@
 #' @return a "sf" "dataframe" object
 
 data_CPCAD_areas <- function(bioregion, zones = FALSE){
-  areas <- arcpullr::get_layer_by_poly("https://maps-cartes.ec.gc.ca/arcgis/rest/services/CWS_SCF/CPCAD/MapServer/0",
+  areas <- get_layer_by_poly("https://maps-cartes.ec.gc.ca/arcgis/rest/services/CWS_SCF/CPCAD/MapServer/0",
                               sf::st_convex_hull(bioregion),
                               where="BIOME='M'") |>
     sf::st_filter(bioregion) |>

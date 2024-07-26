@@ -16,6 +16,6 @@
 #' }
 
 data_bioregion <- function(bioregion = "Scotian Shelf"){
-  bioregion <- arcpullr::get_spatial_layer("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0",
+  bioregion <- get_spatial_layer("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0",
                                            where=paste0("NAME_E='",bioregion,"'"))
 }
