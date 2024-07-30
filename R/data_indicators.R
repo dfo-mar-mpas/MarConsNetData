@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' stAnnsBankContext <- data_indicators()
+#' indicators <- data_indicators()
 #' }
 #'
 #' @return a "sf" "dataframe" object

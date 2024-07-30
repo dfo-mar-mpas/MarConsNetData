@@ -99,6 +99,10 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
   if (any(final == "            ")) {
     final <- final[-which(final == "            ")]
   }
+
+  if (any(final == "    ")) {
+    final <- final[-which(final == "    ")]
+  }
   } else if (type == "network") {
     minLine <- which(grepl("The objectives for the conservation", lines[[1]],ignore.case = TRUE))+2
     maxLine <- which(grepl("Selecting conservation priorities", lines[[1]], ignore.case = TRUE))-2
