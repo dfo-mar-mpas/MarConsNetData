@@ -65,10 +65,20 @@ data_context <- function(type=NULL, area="stAnnsBank") {
 
   if (type == "site") {
     minLine <- which(grepl("Location", lines[[1]], ignore.case=TRUE))
-    maxLine <- which(grepl("Conservation Objectives", lines[[1]], ignore.case=TRUE))[1]-1
+    if (length(minLine) > 0) {
+      minLine <- minLine[1]  # Use only the first occurrence
+    } else {
+      stop("No occurrences of 'Location' found.")
+    }
+
+    maxLine <- which(grepl("Conservation Objectives", lines[[1]], ignore.case=TRUE))
+    if (length(maxLine) > 0) {
+      maxLine <- maxLine[1] - 1  # Use only the first occurrence and subtract 1
+    } else {
+      stop("No occurrences of 'Conservation Objectives' found.")
+    }
 
   final <- lines[[1]][minLine:maxLine]
-
 
 
     final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
