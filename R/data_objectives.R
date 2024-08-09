@@ -5,20 +5,20 @@
 #'
 #' @param type argument of either `site` or `network` indicating which objectives to obtain
 #' @param area a name of an area of which to obtain the objectives from. Options include
-#' `stAnnsBank`, `musquash`, `laurentianChannel`, `gully`, `gilbert`, `eastport`,
-#' `basinHead`, `bancsDesAmericains`
+#' `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
+#' `basin_MPA`, `bancsDesAmericains_MPA`
 #' @importFrom rvest read_html
 #' @importFrom httr GET content
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' stAnnsBankObjectives <- data_objectives(type="site", area="stAnnsBank")
+#' stAnnsBankObjectives <- data_objectives(type="site", area="st_Anns_Bank_MPA")
 #' }
 #'
 #' @return a "sf" "dataframe" object
 #'
-data_objectives <- function(type=NULL, area="stAnnsBank") {
+data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
   if (is.null(type)) {
     stop("Must provide a type argument of either network or site")
   }
@@ -27,30 +27,30 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
     stop("Must provide a type argument of either network or site")
   }
 
-  if (!(area %in% c("stAnnsBank", "musquash", "laurentianChannel", "gully", "gilbert", "eastport",
-                    "basinHead", "bancsDesAmericains"))) {
-    stop("Area must be either `stAnnsBank`, `musquash`, `laurentianChannel`, `gully`, `gilbert`, `eastport`,
-                    `basinHead`, `bancsDesAmericains`")
+  if (!(area %in% c("st_Anns_Bank_MPA", "musquash_MPA", "laurentian_Channel_MPA", "gully_MPA", "gilbert_MPA", "eastport_MPA",
+                    "basin_MPA", "bancsDesAmericains_MPA"))) {
+    stop("Area must be either `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
+                    `basin_MPA`, `bancsDesAmericains_MPA`")
   }
 
   if (type == "network") {
   urls <- "https://www.dfo-mpo.gc.ca/oceans/networks-reseaux/scotian-shelf-plateau-neo-ecossais-bay-baie-fundy/development-developpement-eng.html"
   } else if (type == "site") {
-  if (area == "stAnnsBank") {
+  if (area == "st_Anns_Bank_MPA") {
     u <- "stanns-sainteanne"
-  } else if (area == "musquash") {
+  } else if (area == "musquash_MPA") {
     u <- "musquash"
-  } else if (area == "laurentianChannel") {
+  } else if (area == "laurentian_Channel_MPA") {
     u <- "laurentian-laurentien"
-  } else if (area == "gully") {
+  } else if (area == "gully_MPA") {
     u <- "gully"
-  } else if (area == "gilbert") {
+  } else if (area == "gilbert_MPA") {
     u <- "gilbert"
-  } else if (area == "eastport") {
+  } else if (area == "eastport_MPA") {
     u <- "eastport"
-  } else if (area == "basinHead") {
+  } else if (area == "basin_MPA") {
     u <- "basin-head"
-  } else if (area == "bancsDesAmericains") {
+  } else if (area == "bancsDesAmericains_MPA") {
     u <- "american-americains"
   }
 
@@ -68,7 +68,7 @@ data_objectives <- function(type=NULL, area="stAnnsBank") {
   maxLine <- which(grepl("Prohibitions", lines[[1]]))-1
 
   # Unique for bansDesAmericains
-  if (area == "bancsDesAmericains") {
+  if (area == "bancsDesAmericains_MPA") {
     minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Américains Marine Protected are to:</p>\r")+2
     maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
   }
