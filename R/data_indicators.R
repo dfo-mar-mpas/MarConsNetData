@@ -13,7 +13,9 @@
 #'
 #' @return a "sf" "dataframe" object
 #'
-data_indicators <- function() {
+data_indicators <- function(area="st_anns_bank") {
+
+  if (area == "st_anns_bank") {
 
   url <- "https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/361257.pdf"
   pdf_text <- pdf_text(url)
@@ -30,5 +32,7 @@ data_indicators <- function() {
   final <- lines[minLine:maxLine]
   indicators <- grep("^[0-9]+\\)", final, value = TRUE)
   indicators <- sub("^[0-9]+\\)\\s+", "", indicators) # keep everything after space. I.e remove 1)
-  return(indicators)
+  }
+  df <- data.frame(indicators=indicators, area=rep(area, length(indicators)))
+  return(df)
 }
