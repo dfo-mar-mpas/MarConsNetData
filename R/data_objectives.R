@@ -6,7 +6,7 @@
 #' @param type argument of either `site` or `network` indicating which objectives to obtain
 #' @param area a name of an area of which to obtain the objectives from. Options include
 #' `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
-#' `basin_MPA`, `bancsDesAmericains_MPA`
+#' `basin_MPA`, `bancsDesAmericains_MPA`, `WEBCA`
 #' @importFrom rvest read_html
 #' @importFrom httr GET content
 #' @export
@@ -28,9 +28,9 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
   }
 
   if (!(area %in% c("st_Anns_Bank_MPA", "musquash_MPA", "laurentian_Channel_MPA", "gully_MPA", "gilbert_MPA", "eastport_MPA",
-                    "basin_MPA", "bancsDesAmericains_MPA"))) {
+                    "basin_MPA", "bancsDesAmericains_MPA", "WEBCA"))) {
     stop("Area must be either `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
-                    `basin_MPA`, `bancsDesAmericains_MPA`")
+                    `basin_MPA`, `bancsDesAmericains_MPA`". "WEBCA")
   }
 
   if (type == "network") {
@@ -55,9 +55,10 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
   }
 
   urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
+  if (area == "WEBCA") {
+    urls <- 'https://www.dfo-mpo.gc.ca/oceans/oecm-amcepz/refuges/westernemerald-emeraudewestern-eng.html'
+  }
   } # End Site
-
-#The BIG 3
 
   pages <- lapply(urls,read_html)
   response <- lapply(urls, GET)
@@ -71,6 +72,9 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
   if (area == "bancsDesAmericains_MPA") {
     minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Américains Marine Protected are to:</p>\r")+2
     maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
+  } else if (area == "WEBCA") {
+    minLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[1]
+    maxLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[2]
   }
 
   final <- lines[[1]][minLine:maxLine]

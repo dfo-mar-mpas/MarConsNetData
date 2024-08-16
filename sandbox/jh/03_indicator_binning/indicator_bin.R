@@ -1,7 +1,8 @@
 library(writexl)
 #SAB
-sab <- data_indicators("st_anns_bank")
 csv <- read.csv("../MarConsNetAnalysis/sandbox/RD/mf_indicators.csv")
+sabi <- unique(csv$Indicator[which(csv$source == "https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/361257.pdf")])
+sab <- data.frame(indicators=sabi, area=rep("st_anns_bank", length(sabi)))
 
 
 #GULLY
@@ -30,5 +31,5 @@ region",
 musquash <- data.frame(indicators=musquashi, area="musquash")
 
 df <- rbind(sab,gully,musquash)
-write_xlsx(df, "indicators.xlsx")
+#write_xlsx(df, "indicators2.xlsx")
 

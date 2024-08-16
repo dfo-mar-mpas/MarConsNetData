@@ -6,7 +6,7 @@
 #' @param type argument of either `site` or `network` indicating which objectives to obtain
 #' @param area a name of an area of which to obtain the objectives from. Options include
 #' `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
-#' `basin_MPA`, `bancsDesAmericains_MPA`
+#' `basin_MPA`, `bancsDesAmericains_MPA`, `WEBCA`
 #' @importFrom rvest read_html
 #' @importFrom httr GET content
 #' @export
@@ -28,9 +28,9 @@ data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
   }
 
   if (!(area %in% c("st_Anns_Bank_MPA", "musquash_MPA", "laurentian_Channel_MPA", "gully_MPA", "gilbert_MPA", "eastport_MPA",
-                    "basin_MPA", "bancsDesAmericains_MPA"))) {
+                    "basin_MPA", "bancsDesAmericains_MPA", "WEBCA"))) {
     stop("Area must be either `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
-                    `basin_MPA_MPA`, `bancsDesAmericains_MPA`")
+                    `basin_MPA_MPA`, `bancsDesAmericains_MPA` or `WEBCA`")
   }
 
   if (type == "network") {
@@ -55,9 +55,12 @@ data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
     }
 
     urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
-  } # End Site
 
-  #The BIG 3
+    if (area == "WEBCA") {
+      urls <- 'https://www.dfo-mpo.gc.ca/oceans/oecm-amcepz/refuges/westernemerald-emeraudewestern-eng.html'
+
+    }
+  } # End Site
 
   pages <- lapply(urls,read_html)
   response <- lapply(urls, GET)
@@ -67,18 +70,18 @@ data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
     minLine <- which(grepl("Location", lines[[1]], ignore.case=TRUE))
     if (length(minLine) > 0) {
       minLine <- minLine[1]  # Use only the first occurrence
-    } else {
-      stop("No occurrences of 'Location' found.")
     }
 
     maxLine <- which(grepl("Conservation Objectives", lines[[1]], ignore.case=TRUE))
     if (length(maxLine) > 0) {
       maxLine <- maxLine[1] - 1  # Use only the first occurrence and subtract 1
-    } else {
-      stop("No occurrences of 'Conservation Objectives' found.")
     }
 
-  final <- lines[[1]][minLine:maxLine]
+    if (area == "WEBCA") {
+      maxLine <- which(grepl("0.18%", lines[[1]]))
+    }
+
+    final <- lines[[1]][minLine:maxLine]
 
 
     final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
