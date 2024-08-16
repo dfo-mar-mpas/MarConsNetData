@@ -30,7 +30,7 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
   if (!(area %in% c("st_Anns_Bank_MPA", "musquash_MPA", "laurentian_Channel_MPA", "gully_MPA", "gilbert_MPA", "eastport_MPA",
                     "basin_MPA", "bancsDesAmericains_MPA", "WEBCA"))) {
     stop("Area must be either `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
-                    `basin_MPA`, `bancsDesAmericains_MPA`". "WEBCA")
+                    `basin_MPA`, `bancsDesAmericains_MPA`", "WEBCA")
   }
 
   if (type == "network") {
