@@ -36,6 +36,11 @@ data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
   if (type == "network") {
     urls <- "https://www.dfo-mpo.gc.ca/oceans/networks-reseaux/scotian-shelf-plateau-neo-ecossais-bay-baie-fundy/development-developpement-eng.html"
   } else if (type == "site") {
+
+    if (area == "WEBCA") {
+      urls <- 'https://www.dfo-mpo.gc.ca/oceans/oecm-amcepz/refuges/westernemerald-emeraudewestern-eng.html'
+
+    } else {
     if (area == "st_Anns_Bank_MPA") {
       u <- "stanns-sainteanne"
     } else if (area == "musquash_MPA") {
@@ -55,11 +60,8 @@ data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
     }
 
     urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
-
-    if (area == "WEBCA") {
-      urls <- 'https://www.dfo-mpo.gc.ca/oceans/oecm-amcepz/refuges/westernemerald-emeraudewestern-eng.html'
-
     }
+
   } # End Site
 
   pages <- lapply(urls,read_html)
