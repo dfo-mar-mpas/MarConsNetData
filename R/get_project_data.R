@@ -77,6 +77,8 @@ get_project_data <- function(ids=NULL, titles=NULL, taxize=FALSE, MPA=NULL) {
     df <- project_eDNAMetabarcoding(taxize=taxize)
   } else if (id == 1491 | title %in% c("optimizingeDNA")) {
     df <- project_optimizingeDNA(taxize=taxize)
+  } else if (id == "579" | title == "AZMP") {
+    df <- project_AZMP(taxize=taxize)
   }
     LIST[[II]] <- df
     }
