@@ -1,0 +1,35 @@
+---
+title: what's in Jaimie's file?
+---
+
+```{r}
+library(oce)
+file <- "~/data/AZMP/winter/1997/CTD_NED1996254_003_01_DN.ODF.nc"
+# Method 1
+d <- read.netcdf(file)
+print(names(d@data))
+# Um, not too sure what all this stuff is... let's just read it with
+# low-level things to be sure we don't get mixed up by assumptions made
+# by oce.
+
+# Method 2
+library(ncdf4)
+nc <- nc_open(file)
+names(nc$var)
+# guessing... but notice that pressure is well, I dunno
+pressure <- ncvar_get(nc, "PRESPR01")
+str(pressure)
+temperature <- ncvar_get(nc, "TEMPS601")
+str(temperature)
+#time <- numberAsPOSIXct(time)
+salinity <- ncvar_get(nc, "PSALST01")
+str(salinity)
+ctd <- as.ctd(salinity = salinity, temperature = temperature, pressure = pressure)
+# I normally plot with eos="gsw" but for that we need to know longitude and latitude,
+# which *may* be in the file, but the first thing is to figure out which things
+# to read!
+plot(ctd, eos = "unesco")
+
+# Get whole info next but it's a LOT!
+nc
+```
