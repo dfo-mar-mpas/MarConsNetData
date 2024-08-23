@@ -72,7 +72,7 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
 
   # Unique for bansDesAmericains
   if (area == "bancsDesAmericains_MPA") {
-    minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Américains Marine Protected are to:</p>\r")+2
+    minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Am\u00e9ricains Marine Protected are to:</p>\r")+2
     maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
   } else if (area == "WEBCA") {
     minLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[1]
