@@ -4,14 +4,14 @@
 \alias{data_objectives}
 \title{Get Objectives from Canadian Protected and Conserved Areas}
 \usage{
-data_objectives(type = NULL, area = "stAnnsBank")
+data_objectives(type = NULL, area = "st_Anns_Bank_MPA")
 }
 \arguments{
 \item{type}{argument of either \code{site} or \code{network} indicating which objectives to obtain}
 
 \item{area}{a name of an area of which to obtain the objectives from. Options include
-\code{stAnnsBank}, \code{musquash}, \code{laurentianChannel}, \code{gully}, \code{gilbert}, \code{eastport},
-\code{basinHead}, \code{bancsDesAmericains}}
+\code{st_Anns_Bank_MPA}, \code{musquash_MPA}, \code{laurentian_Channel_MPA}, \code{gully_MPA}, \code{gilbert_MPA}, \code{eastport_MPA},
+\code{basin_MPA}, \code{bancsDesAmericains_MPA}, \code{WEBCA}}
 }
 \value{
 a "sf" "dataframe" object
@@ -22,7 +22,7 @@ Canadian protected and conserved areas in the Scotian Shelf bio region.
 }
 \examples{
 \dontrun{
-stAnnsBankObjectives <- data_objectives(type="site", area="stAnnsBank")
+stAnnsBankObjectives <- data_objectives(type="site", area="st_Anns_Bank_MPA")
 }
 
 }

@@ -4,7 +4,7 @@
 \alias{data_indicators}
 \title{Get Monitoring Indicators}
 \usage{
-data_indicators()
+data_indicators(area = "st_anns_bank")
 }
 \value{
 a "sf" "dataframe" object
@@ -15,7 +15,7 @@ St. Anns Bank Area of Interest paper and the Ecosystem Based Management paper.
 }
 \examples{
 \dontrun{
-stAnnsBankContext <- data_indicators()
+indicators <- data_indicators()
 }
 
 }

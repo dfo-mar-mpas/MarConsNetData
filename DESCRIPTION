@@ -12,7 +12,7 @@ License: GPL (>= 2)
 Depends: R (>= 3.5.0)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 URL: https://github.com/dfo-mar-mpas/MarConsNetData, https://dfo-mar-mpas.github.io/MarConsNetData/
 BugReports: https://github.com/dfo-mar-mpas/MarConsNetData/issues
 Suggests: 
