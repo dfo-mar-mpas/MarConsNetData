@@ -23,10 +23,11 @@
 #' @return a "sf" "dataframe" object
 
 data_CPCAD_areas <- function(bioregion, zones = FALSE){
+  validbioregion <- sf::st_make_valid(bioregion)
   areas <- get_layer_by_poly("https://maps-cartes.ec.gc.ca/arcgis/rest/services/CWS_SCF/CPCAD/MapServer/0",
-                              sf::st_convex_hull(bioregion),
+                              sf::st_convex_hull(validbioregion),
                               where="BIOME='M'") |>
-    sf::st_filter(bioregion) |>
+    sf::st_filter(validbioregion) |>
     sf::st_make_valid()
 
   if(zones){
