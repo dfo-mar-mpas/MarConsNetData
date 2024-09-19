@@ -18,9 +18,10 @@
 #' }
 
 data_OBIS <- function(areas, geom_col = "geoms", name_col = "NAME_E"){
+  new_column_name <- paste0(deparse(substitute(areas)),"_",name_col)
   obis_occ <- apply(areas,1,function(a){
     occ <- robis::occurrence(geometry = sf::st_as_text(sf::st_as_sfc(sf::st_bbox(a[[geom_col]])))) |>
-      dplyr::mutate(CPCAP_NAME_E = a[[name_col]])
+      dplyr::mutate(!!new_column_name := a[[name_col]])
     return(occ)
   }) |>
     dplyr::bind_rows() |>
