@@ -13,8 +13,7 @@
 #' @param force A boolean indicating if a new version of this data should
 #' be obtained or not
 #'
-#' @importFrom XML read_html
-#' @importFrom rvest html_attr
+#' @importFrom rvest html_attr html_nodes read_html
 #' @importFrom httr write_disk
 #' @importFrom oce numberAsPOSIXct as.ctd
 #' @importFrom ncdf4 nc_open ncvar_get
