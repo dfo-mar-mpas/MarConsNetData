@@ -7,7 +7,7 @@
 data_bioregion(bioregion = "Scotian Shelf")
 }
 \arguments{
-\item{bioregion}{name of the bio region to match from the \code{NAME_E} column from \href{https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0}{Open Data}. Default is \code{"Scotian Shelf"}}
+\item{bioregion}{name of the bio region to match from the \code{NAME_E} column from \href{https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0}{Open Data} or one of the Ocean Basins to return multiple bioregions (i.e. "Atlantic"). Default is \code{"Scotian Shelf"}}
 }
 \value{
 sf data.frame
