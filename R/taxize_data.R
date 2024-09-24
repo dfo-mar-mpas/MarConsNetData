@@ -5,7 +5,6 @@
 #'
 #' @param df data frame to be taxized
 #' @importFrom taxize tax_name
-
 #' @export
 
 taxize_data <- function(df=NULL) {

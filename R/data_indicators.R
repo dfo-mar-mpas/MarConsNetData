@@ -3,6 +3,8 @@
 #' This function obtains a list of indicators from the monitoring framework for
 #' St. Anns Bank Area of Interest paper and the Ecosystem Based Management paper.
 #'
+#' @param area Character string for the protected area
+#'
 #' @importFrom pdftools pdf_text
 #' @export
 #'
