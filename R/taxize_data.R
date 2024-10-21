@@ -4,7 +4,8 @@
 #' argument of the `get_project_data` function.
 #'
 #' @param df data frame to be taxized
-#' @importFrom taxize tax_name
+#' @importFrom worrms wm_records_name
+#' @importFrom worrms wm_classification
 #' @export
 
 taxize_data <- function(df=NULL) {
@@ -19,13 +20,19 @@ taxize_data <- function(df=NULL) {
                      group=0)
   for (i in seq_along(SPECIES)) {
     s <- SPECIES[i]
-    tN <- tax_name(s, get = 'subphylum', db = 'itis',ask=FALSE)$subphylum
-    if (!(is.na(tN))) {
-      if (!(tN == "Vertebrata")) {
-        sKey$group[i] <- tN
+    records <- try(worrms::wm_records_name(s),silent = TRUE)
+    if (!inherits(records,"try-error")) {
+      tN <- try(wm_classification(records$AphiaID[1]))
+    } else {
+      tN <- try(log("a"))
+    }
+
+    # tN <- tax_name(s, get = 'subphylum', db = 'itis',ask=FALSE)$subphylum
+    if (!inherits(tN,"try-error")) {
+      if (!(tN$scientificname[tN$rank=="Subphylum"] == "Vertebrata")) {
+        sKey$group[i] <- tN$scientificname[tN$rank=="Subphylum"]
       } else {
-        tN <- tax_name(s, get = 'class', db = 'itis',ask=FALSE)$class
-        sKey$group[i] <- tN
+        sKey$group[i] <- tN$scientificname[tN$rank=="Class"]
       }
     } else {
       sKey$group[i] <- "NA"
