@@ -2,9 +2,9 @@
 #'
 #' Data is from the csv files on https://open.canada.ca/data/en/dataset/8ddcaeea-b806-4958-a79f-ba9ab645f53b
 #'
-#' @param survey character string indicating the survey to be downloaded. Defaults to "summer", but can also accept "spring", "fall", and "4VSW"
+#' @param survey character string indicating the survey to be downloaded. Defaults to "summer", but can also accept "spring", "fall", "4VSW", and "summer_strata"
 #'
-#' @return list of data.frames
+#' @return list of data.frames or sf data.frame
 #' @export
 #'
 #' @examples
@@ -25,6 +25,8 @@ data_MarRV_survey_open <- function(survey="summer"){
     download.file("https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/5f82b379-c1e5-4a02-b825-f34fc645a529/attachments/FALL_csv.zip",tmp)
   }else  if(survey=="spring"){
     download.file("https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/fecf045a-95a2-4b69-8a40-818649a62716/attachments/SPRING_csv.zip",tmp)
+  }else if(survey=="summer_strata"){
+    get_spatial_layer("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Maritimes_Summer_Research_Vessel_Survey_En/MapServer/1")
   }else{
     warning("Other surveys are not yet functional")
   }
