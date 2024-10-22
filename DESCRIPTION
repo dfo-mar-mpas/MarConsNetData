@@ -7,7 +7,7 @@ Author:
         comment=c(ORCID="https://orcid.org/0000-0001-8832-4189"))) 
 Maintainer: Jaimie Harbin <jaimie.harbin@dfo-mpo.gc.ca>
 Description: Get data for sampling efforts in MPAs.
-Imports: readxl, magrittr, tidyr, dplyr, taxize, utils, arcpullr, sf, rlang, robis, methods, httr, rvest, ncdf4, oce, pdftools, jsonlite
+Imports: readxl, magrittr, tidyr, dplyr, utils, arcpullr, sf, rlang, robis, methods, httr, rvest, ncdf4, oce, pdftools, jsonlite
 License: GPL (>= 2)
 Depends: R (>= 3.5.0)
 Encoding: UTF-8
@@ -19,4 +19,5 @@ Suggests:
     knitr,
     rmarkdown,
     markdown
+Remotes: CRAN/taxize@0.9.100.1
 VignetteBuilder: knitr
