@@ -6,6 +6,9 @@
 \usage{
 data_indicators(area = "st_anns_bank")
 }
+\arguments{
+\item{area}{Character string for the protected area}
+}
 \value{
 a "sf" "dataframe" object
 }
