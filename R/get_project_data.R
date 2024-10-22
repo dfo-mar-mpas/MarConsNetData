@@ -18,7 +18,6 @@
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr summarise count group_by mutate mutate_all n
-#' @importFrom taxize tax_name
 #' @importFrom utils read.csv read.table
 #'
 #' @return dataframe

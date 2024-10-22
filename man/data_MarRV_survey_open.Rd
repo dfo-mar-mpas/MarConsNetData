@@ -7,10 +7,10 @@
 data_MarRV_survey_open(survey = "summer")
 }
 \arguments{
-\item{survey}{character string indicating the survey to be downloaded. Defaults to "summer", but can also accept "spring", "fall", and "4VSW"}
+\item{survey}{character string indicating the survey to be downloaded. Defaults to "summer", but can also accept "spring", "fall", "4VSW", and "summer_strata"}
 }
 \value{
-list of data.frames
+list of data.frames or sf data.frame
 }
 \description{
 Data is from the csv files on https://open.canada.ca/data/en/dataset/8ddcaeea-b806-4958-a79f-ba9ab645f53b
