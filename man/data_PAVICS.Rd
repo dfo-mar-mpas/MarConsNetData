@@ -10,7 +10,8 @@ data_PAVICS(
   first_date = "1950-01-01",
   end_date = "1951-01-1",
   variable = "tas",
-  geom = data_planning_areas()
+  geom = data_planning_areas(),
+  maskGeom = TRUE
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ data_PAVICS(
 \item{variable}{character string for the variable to query from the data. Defaults to "tas" for Near-Surface Air Temperature. See the OPENDAP url for more options}
 
 \item{geom}{sf data.frame used to limit the spatial extent of the data subset (via bounding box). Defaults to the Scotian Shelf and Bay of Fundy planning area}
+
+\item{maskGeom}{logical defaults to TRUE to turn values outside the \code{geom} to NA instead of returning all the values that are downloaded as is.}
 }
 \value{
 matrix
