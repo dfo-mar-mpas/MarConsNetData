@@ -2,7 +2,7 @@
 #'
 #' Get data from [PAVICS]("https://pavics.ouranos.ca/index.html") THREDDS [catalog](https://pavics.ouranos.ca/thredds/catalog.html)
 #'
-#' @param OPENDAP_url character string for an OPENDAP url from the THREDDS [catalog](https://pavics.ouranos.ca/thredds/catalog.html). Defaults to "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml"
+#' @param OPENDAP_url character string for an OPENDAP url from the THREDDS [catalog](https://pavics.ouranos.ca/thredds/catalog.html). Defaults to a [RCM-CMIP6]("https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml") daily simulation
 #' @param first_date character string for the first date to be included in the data subset. Defaults to "1950-01-01"
 #' @param end_date character string for the last date to be included in the data subset. Defaults to "1950-01-01"
 #' @param geom sf data.frame used to limit the spatial extent of the data subset (via bounding box). Defaults to the Scotian Shelf and Bay of Fundy planning area
@@ -17,7 +17,7 @@
 #' @importFrom ncdf4 nc_close
 #' @importFrom stars read_ncdf
 #' @importFrom sf st_crs
-#' @importFrom sf
+#' @importFrom sf st_bbox
 #' @importFrom PCICt as.PCICt
 #'
 #' @examples
