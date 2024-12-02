@@ -21,10 +21,34 @@
 #' @importFrom PCICt as.PCICt
 #'
 #' @examples
+#' \dontrun{
 #' require(MarConsNetData)
+#' require(dplyr)
+#' # get the Scotian Shelf polygon
 #' ssbof <- data_planning_areas()
-#' climate <- data_PAVICS
-#' image(apply(climate,c(1,2),mean))
+#'
+#' # get CMIP6 data dor Near-Surface Air Temperature (tas)
+#' climate <- data_PAVICS(OPENDAP_url = "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml",
+#'                        first_date = "1950-01-01",
+#'                        end_date = "1950-03-1",
+#'                        variable = "tas",
+#'                        geom = ssbof,
+#'                        maskGeom = TRUE)
+#'
+#' # plot a single time point
+#' climate |>
+#'   slice("time",1) |>
+#'   plot()
+#'
+#' # calculate and plot monthly means
+#' monthlyClimate <- aggregate(climate,
+#'                             by = "1 month",
+#'                             FUN = mean,
+#'                             na.rm = TRUE)
+#'
+#' plot(monthlyClimate)
+#'
+#' }
 #'
 data_PAVICS <- function(OPENDAP_url = "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml",
                         first_date = "1950-01-01",
@@ -119,7 +143,7 @@ data_PAVICS <- function(OPENDAP_url = "https://pavics.ouranos.ca/twitcher/ows/pr
 
     # Extract subset for a given variable
     ncsub <- cbind(start = c(min(lat_lon_indices[,1]),
-                             min(lon_within_bbox),
+                             min(lat_lon_indices[2]),
                              min(time_indices)),
                    count = c(max(lat_lon_indices[,1])-min(lat_lon_indices[,1])+1,
                              max(lat_lon_indices[,2])-min(lat_lon_indices[,2])+1,
@@ -134,7 +158,7 @@ data_PAVICS <- function(OPENDAP_url = "https://pavics.ouranos.ca/twitcher/ows/pr
 
 
 
-  st_crs(data_subset) <- 4326
+  sf::st_crs(data_subset) <- 4326
 
 
   # Close the NetCDF connection
