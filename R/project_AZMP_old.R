@@ -19,9 +19,8 @@
 #' @importFrom ncdf4 nc_open ncvar_get
 #'
 #' @return A list of NetCDF files downloaded in your destdir
-#' @export
 
-project_AZMP <- function(season="fall", destdir="tmp", force=FALSE) {
+project_AZMP_old <- function(season="fall", destdir="tmp", force=FALSE) {
   if (is.null(season)) {
     stop("Must provide a type argument of either fall, spring, summer, fall, or all")
   }

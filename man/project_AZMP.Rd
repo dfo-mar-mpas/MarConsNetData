@@ -4,25 +4,15 @@
 \alias{project_AZMP}
 \title{Get data for AZMP (579)}
 \usage{
-project_AZMP(season = "fall", destdir = "tmp", force = FALSE)
+project_AZMP(bd = bloom_df)
 }
 \arguments{
-\item{season}{character vector of either fall or spring. If fall is given
-the data from the fall program is returned. If spring is given the
-CTD data from the spring program is returned. If summer or winter
-is given, the CTD ground fish data is given from the respective
-season.}
-
-\item{destdir}{a directory indicating where to save the fetched data.}
-
-\item{force}{A boolean indicating if a new version of this data should
-be obtained or not}
+\item{bd}{bloom_df likely from the targets file}
 }
 \value{
-A list of NetCDF files downloaded in your destdir
+dataframe
 }
 \description{
-This function gets the CTD data from the fall and spring
-surveys as well as the fixed stations and ground fish CTD
-data.
+This function uses the azmpdata package to get the location of relevant
+sampling used
 }
