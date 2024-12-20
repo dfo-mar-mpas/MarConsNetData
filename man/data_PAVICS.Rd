@@ -10,11 +10,12 @@ data_PAVICS(
   first_date = "1950-01-01",
   end_date = "1951-01-1",
   variable = "tas",
-  geom = data_planning_areas()
+  geom = data_planning_areas(),
+  maskGeom = TRUE
 )
 }
 \arguments{
-\item{OPENDAP_url}{character string for an OPENDAP url from the THREDDS \href{https://pavics.ouranos.ca/thredds/catalog.html}{catalog}. Defaults to "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml"}
+\item{OPENDAP_url}{character string for an OPENDAP url from the THREDDS \href{https://pavics.ouranos.ca/thredds/catalog.html}{catalog}. Defaults to a \href{"https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml"}{RCM-CMIP6} daily simulation}
 
 \item{first_date}{character string for the first date to be included in the data subset. Defaults to "1950-01-01"}
 
@@ -23,6 +24,8 @@ data_PAVICS(
 \item{variable}{character string for the variable to query from the data. Defaults to "tas" for Near-Surface Air Temperature. See the OPENDAP url for more options}
 
 \item{geom}{sf data.frame used to limit the spatial extent of the data subset (via bounding box). Defaults to the Scotian Shelf and Bay of Fundy planning area}
+
+\item{maskGeom}{logical defaults to TRUE to turn values outside the \code{geom} to NA instead of returning all the values that are downloaded as is.}
 }
 \value{
 matrix
@@ -31,9 +34,33 @@ matrix
 Get data from \href{"https://pavics.ouranos.ca/index.html"}{PAVICS} THREDDS \href{https://pavics.ouranos.ca/thredds/catalog.html}{catalog}
 }
 \examples{
+\dontrun{
 require(MarConsNetData)
+require(dplyr)
+# get the Scotian Shelf polygon
 ssbof <- data_planning_areas()
-climate <- data_PAVICS
-image(apply(climate,c(1,2),mean))
+
+# get CMIP6 data dor Near-Surface Air Temperature (tas)
+climate <- data_PAVICS(OPENDAP_url = "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml",
+                       first_date = "1950-01-01",
+                       end_date = "1950-03-1",
+                       variable = "tas",
+                       geom = ssbof,
+                       maskGeom = TRUE)
+
+# plot a single time point
+climate |>
+  slice("time",1) |>
+  plot()
+
+# calculate and plot monthly means
+monthlyClimate <- aggregate(climate,
+                            by = "1 month",
+                            FUN = mean,
+                            na.rm = TRUE)
+
+plot(monthlyClimate)
+
+}
 
 }
