@@ -2,12 +2,12 @@
 #'
 #' This function uses the azmpdata package to get the location of relevant
 #' sampling used
-#' @param bd bloom_df likely from the targets file
 #'
 #' @return dataframe
+#' @importFrom dyplr distinct
 #' @export
 
-project_AZMP <- function(bd = bloom_df) {
+project_AZMP <- function() {
   # df1
 
   df1 <- azmpdata::Discrete_Occupations_Sections
@@ -26,8 +26,45 @@ project_AZMP <- function(bd = bloom_df) {
   df2$type <- "Zooplankton Catches "
 
   # df3
-  df3 <- bd
+
+  script_lines <- readLines("https://raw.githubusercontent.com/BIO-RSG/PhytoFit/refs/heads/master/tools/tools_01a_define_polygons.R")
+
+  k1 <- which(grepl("poly\\$atlantic = list", script_lines))
+  k2 <- which(grepl("-61.1957, -61.1957, -59.54983, -59.54983, -61.1957", script_lines))
+  script <- script_lines[k1:k2]
+  poly <- list()
+  eval(parse(text=script))
+
+
+
+  DF <- list()
+  DF[[1]] <- poly$atlantic$AZMP$CS_V02
+  DF[[2]] <- poly$atlantic$AZMP$ESS_V02
+  DF[[3]] <- poly$atlantic$AZMP$CSS_V02
+  DF[[4]] <- poly$atlantic$AZMP$WSS_V02
+  DF[[5]] <- poly$atlantic$AZMP$GB_V02
+  DF[[6]] <- poly$atlantic$AZMP$LS_V02
+
+  dfNames <- c("CS_remote_sensing", "ESS_remote_sensing", "CSS_remote_sensing", "WSS_remote_sensing",
+  "GB_remote_sensing", "LS_remote_sensing")
+  names(DF) <- dfNames
+
+
+  df <- azmpdata::RemoteSensing_Annual_Broadscale
+  df$geom <- 0
+
+  for (i in seq_along(dfNames)) {
+    #message(i)
+  coords <- matrix(c(DF[[i]]$lon, DF[[i]]$lat), ncol = 2, byrow = FALSE)
+  coords <- rbind(coords, coords[1,])
+  polygon_sf <- st_sfc(st_polygon(list(coords)))
+  df$geom[which(df$area == dfNames[i])] <- polygon_sf
+  }
+
+  df3 <- df
   df3$type <- "RemoteSensing"
+  df3 <- df3 %>%
+    distinct(area, .keep_all = TRUE)
 
   # df4
 
@@ -50,7 +87,7 @@ project_AZMP <- function(bd = bloom_df) {
   dfs <- list(df1,df2,df3,df4)
   locations <- list()
   for (i in seq_along(dfs)) {
-    message(i)
+    #message(i)
     if (!("geom" %in% names(dfs[[i]]))) {
   latitude <- round(dfs[[i]]$latitude, 2)
   longitude <- round(dfs[[i]]$longitude, 2)
@@ -58,17 +95,33 @@ project_AZMP <- function(bd = bloom_df) {
 
   # Find unique rows (unique latitude-longitude pairs)
   loc <- as.data.frame(unique(lat_lon_pairs))
-  loc$geom <- NA
     } else {
-      loc <- data.frame(geom=dfs[[i]]$geom)
-      loc$latitude <- 0
-      loc$longitude <- 0
+      #browser()
+      loc <- data.frame(latitude=rep(0, length(df3[,c("geom")])), longitude=0)
+      loc <- st_sf(loc, geometry = st_sfc(df3[,c("geom")]))
+
     }
   loc$type <- unique(dfs[[i]]$type)
   locations[[i]] <- loc
   }
 
+
+
+  # TEST
+  empty_geometry <- st_sfc(list(
+    st_polygon(list())
+  ))
+
+  for (i in seq_along(locations)) {
+    if (!("sf" %in% class(locations[[i]]))) {
+      rownames(locations[[i]]) <- NULL
+    locations[[i]] <- suppressWarnings(st_sf(locations[[i]], geometry = empty_geometry))
+    }
+  }
+  # END TEST
+
   locations <- lapply(locations, function(x) x[sort(names(x))])
+
   locations <- bind_rows(locations)
 
   return(locations)
