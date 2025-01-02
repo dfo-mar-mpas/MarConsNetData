@@ -102,5 +102,7 @@ project_eDNAMetabarcoding <- function(taxize=FALSE, MPA=NULL) {
     }
   }
 
+  df$type <- "eDNA Sampling"
+
 }
 

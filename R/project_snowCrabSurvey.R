@@ -76,5 +76,6 @@ project_snowCrabSurvey <- function(taxize=FALSE, MPA=NULL) {
       df <- cbind(id = id, df)
     }
   }
+  df$type <- "Trawl Survey"
   return(df)
 }
