@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   obis: obis.html
-last_built: 2025-01-06T13:14Z
+last_built: 2025-01-16T17:52Z
 urls:
   reference: https://dfo-mar-mpas.github.io/MarConsNetData/reference
   article: https://dfo-mar-mpas.github.io/MarConsNetData/articles
