@@ -2,8 +2,6 @@
 #'
 #' @return a data frame containing number of whale sightings per year for WEBCA
 #' @export
-#'
-#' @examples
 project_whale_sighting <- function() {
 
 files <- list.files(file.path(Sys.getenv("OneDriveCommercial"),"MarConsNetTargets","data", "whale"), full.names = TRUE)

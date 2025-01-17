@@ -4,7 +4,7 @@
 #' sampling used
 #'
 #' @return dataframe
-#' @importFrom dyplr distinct
+#' @importFrom dplyr distinct
 #' @export
 
 project_AZMP <- function() {

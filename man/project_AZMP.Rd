@@ -4,10 +4,7 @@
 \alias{project_AZMP}
 \title{Get data for AZMP (579)}
 \usage{
-project_AZMP(bd = bloom_df)
-}
-\arguments{
-\item{bd}{bloom_df likely from the targets file}
+project_AZMP()
 }
 \value{
 dataframe
