@@ -117,7 +117,17 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
     final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
     final <- sub("^[^>]*>", "", final) # remove everything before first >
   }
+
+
+  if (area == "WEBCA") {
+    if (length(final) == 2) {
+      source(file.path(Sys.getenv("OneDriveCommercial"),"MarConsNetTargets","data", "site_objectives", "webca.R"))
+      final <- c(final, CO3)
+    }
+  }
+
   final <- paste0("-", final, "\n")
+
 
   return(final)
 }
