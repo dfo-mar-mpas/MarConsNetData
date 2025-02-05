@@ -8,12 +8,12 @@
 #' @export
 
 project_AZMP <- function() {
-  # df1
+  # Data Frame 1
 
   df1 <- azmpdata::Discrete_Occupations_Sections
-  df1$type <- "ctd"
+  df1$type <- "AZMP"
 
-  # df2
+  # Data Frame 2
 
   df2 <- azmpdata::Zooplankton_Annual_Stations
   sdf <- azmpdata::Derived_Occupations_Stations
@@ -23,9 +23,9 @@ project_AZMP <- function() {
     df2$latitude[which(df2$station == unique(df2$station)[i])] <- sdf$latitude[which(sdf$station == unique(df2$station)[i])][1]
     df2$longitude[which(df2$station == unique(df2$station)[i])] <- sdf$longitude[which(sdf$station == unique(df2$station)[i])][1]
   }
-  df2$type <- "Zooplankton Catches "
+  df2$type <- "Zooplankton AZMP"
 
-  # df3
+  # Data Frame 3
 
   script_lines <- readLines("https://raw.githubusercontent.com/BIO-RSG/PhytoFit/refs/heads/master/tools/tools_01a_define_polygons.R")
 
@@ -34,8 +34,6 @@ project_AZMP <- function() {
   script <- script_lines[k1:k2]
   poly <- list()
   eval(parse(text=script))
-
-
 
   DF <- list()
   DF[[1]] <- poly$atlantic$AZMP$CS_V02
@@ -62,26 +60,26 @@ project_AZMP <- function() {
   }
 
   df3 <- df
-  df3$type <- "RemoteSensing"
+  df3$type <- "Remote Sensing"
   df3 <- df3 %>%
     distinct(area, .keep_all = TRUE)
 
-  # df4
+  # Data Frame 4
 
   df4 <- azmpdata::Derived_Monthly_Stations
-  df4$type <- "sea surface height"
+  df4$type <- "derived (AZMP)"
   # Add latitude and longitude
   df4$latitude <- 0
   df4$longitude <- 0
   type <- NULL
   df4$latitude[which(df4$station == "Halifax")] <- 43.5475
-  df4$longitude[which(df4$station == "Halifax")] <- 63.5714
+  df4$longitude[which(df4$station == "Halifax")] <- -63.5714
 
   df4$latitude[which(df4$station == "Yarmouth")] <- 43.8377
-  df4$longitude[which(df4$station == "Yarmouth")] <- 66.1150
+  df4$longitude[which(df4$station == "Yarmouth")] <- -66.1150
 
   df4$latitude[which(df4$station == "North Sydney")] <- 46.2051
-  df4$longitude[which(df4$station == "North Sydney")] <- 60.2563
+  df4$longitude[which(df4$station == "North Sydney")] <- -60.2563
 
 
   dfs <- list(df1,df2,df3,df4)
@@ -123,6 +121,10 @@ project_AZMP <- function() {
   locations <- lapply(locations, function(x) x[sort(names(x))])
 
   locations <- bind_rows(locations)
+
+  locations$latitude[which(locations$latitude == 0)] <- NA
+  locations$longitude[which(locations$longitude == 0)] <- NA
+
 
   return(locations)
 
