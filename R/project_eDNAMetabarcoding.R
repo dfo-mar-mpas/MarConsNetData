@@ -28,6 +28,7 @@ project_eDNAMetabarcoding <- function(taxize=FALSE, MPA=NULL) {
   dataTable <- lat_rounded <- lon_rounded <- species <- NULL
   load(file.path(system.file(package="MarConsNetData"),"data", "dataTable.rda"))
   id <- dataTable$id[which(dataTable$get_function == sys.call()[[1]])]
+  message("id = ", id)
   eDNA <- read_excel("C:/Users/HarbinJ/Documents/GitHub/SABapp/data/eDNA/eDNA_WaterSamples_2022.xlsx", sheet = 3) #FIXME
   sampleId <- eDNA$SampleID
   lon <- eDNA$Long
@@ -101,8 +102,11 @@ project_eDNAMetabarcoding <- function(taxize=FALSE, MPA=NULL) {
       df <- cbind(id = id, df)
     }
   }
-
   df$type <- "eDNA Sampling"
+  names(df)[which(names(df) == "lat")] <- "latitude"
+  names(df)[which(names(df) == "lon")] <- "longitude"
+  #browser()
 
+  return(df)
 }
 

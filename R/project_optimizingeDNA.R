@@ -99,7 +99,9 @@ project_optimizingeDNA <- function(taxize=FALSE, MPA=NULL) {
       df <- cbind(id = id, df)
     }
   }
-
+  names(df)[which(names(df) == "lat")] <- "latitude"
+  names(df)[which(names(df) == "lon")] <- "longitude"
   df$type <- "eDNA Sampling"
+  return(df)
 
 }
