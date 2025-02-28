@@ -16,7 +16,7 @@
 #' ebsa <- data_EBSA(bioregion)
 #' }
 data_EBSA <- function(bioregion){
-  arcpullr::get_layer_by_poly("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Ecologically_and_Biologically_Significant_Areas/MapServer/0",
+  arcpullr::get_layer_by_poly("https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/ecologically_and_biologically_significant_areas/MapServer/1",
                               geometry = sf::st_convex_hull(bioregion)) |>
     sf::st_filter(bioregion)
 }

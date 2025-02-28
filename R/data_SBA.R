@@ -15,7 +15,7 @@
 #' sba <- data_SBA(region)
 #' }
 data_SBA <- function(region){
-  arcpullr::get_layer_by_poly("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/SBAs_Coral_Sponge_2016_EN/MapServer/0",
+  arcpullr::get_layer_by_poly("https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/sbas_coral_sponge_2016_en/MapServer/0",
                               geometry = sf::st_convex_hull(region)) |>
     st_make_valid() |>
     sf::st_filter(region)
