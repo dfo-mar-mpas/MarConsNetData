@@ -17,7 +17,7 @@
 
 data_draft_areas <- function(bioregion = "Scotian Shelf"){
   if(bioregion=="Scotian Shelf"){
-    bioregion <- arcpullr::get_spatial_layer("https://gist.dfo-mpo.gc.ca/arcgis/rest/services/Maritimes/Draft_Conservation_Network_Sites/MapServer/0")
+    bioregion <- arcpullr::get_spatial_layer("https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/draft_conservation_network_sites/MapServer/0")
   } else {
     stop("This function does not support the selected bioregion")
   }
