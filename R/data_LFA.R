@@ -6,7 +6,7 @@
 #'
 #' @param bioregion name of the bio region to match from the `NAME_E` column from [Open Data](https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0). Default is `"Scotian Shelf"`
 #' @param layer integer of the layer from Open Data to query. Defaults to 14 for the current (as of 2022) boundaries. See the
-#' [REST server](https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Historical_Lobster_Fishing_Districts_Maritimes_Region/Mapserver) for additional options
+#' [REST server](https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/historical_lobster_fishing_districts_maritimes_region/MapServer/) for additional options
 #' @return sf data.frame
 #' @importFrom arcpullr get_spatial_layer
 #' @export
@@ -19,7 +19,7 @@
 data_LFA <- function(bioregion = "Scotian Shelf", layer = 14){
   if(bioregion=="Scotian Shelf"){
     bioregion <- arcpullr::get_spatial_layer(
-      paste0("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Historical_Lobster_Fishing_Districts_Maritimes_Region/Mapserver/",layer))
+      paste0("https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/historical_lobster_fishing_districts_maritimes_region/MapServer/",layer))
   } else {
     stop("This function does not support the selected bioregion")
   }

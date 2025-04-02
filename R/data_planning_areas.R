@@ -15,6 +15,6 @@
 #' }
 
 data_planning_areas <- function(PA = "Scotian Shelf and Bay of Fundy"){
-  bioregion <- get_spatial_layer("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Eastern_Canada_Marine_Spatial_Planning_Areas/MapServer/0",
+  bioregion <- get_spatial_layer("https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/eastern_canada_marine_spatial_planning_areas/MapServer/0",
                                            where=paste0("NAME_E='",PA,"'"))
 }

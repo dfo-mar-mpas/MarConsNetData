@@ -22,7 +22,7 @@
 data_commercial_fishing <- function(region){
   validregion <- sf::st_make_valid(region)
 
-  get_layer_by_poly("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Eastern_Canadian_Commercial_Fishing/MapServer/1",
+  get_layer_by_poly("https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/eastern_canadian_commercial_fishing/MapServer/1",
                               sf::st_convex_hull(validregion)) |>
     sf::st_filter(validregion) |>
     sf::st_make_valid()

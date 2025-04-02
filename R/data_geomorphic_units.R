@@ -12,5 +12,5 @@
 #' geomorph <- data_geomorphic_units()
 #' }
 data_geomorphic_units <- function(){
-  arcpullr::get_spatial_layer("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Offshore_Ecological_Human_Use_MPA_Scotian_Shelf_En/MapServer/125")
+  arcpullr::get_spatial_layer("https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/offshore_ecological_human_use_mpa_scotian_shelf_en/MapServer/125")
 }
