@@ -18,7 +18,7 @@
 #'
 #' @return a "sf" "dataframe" object
 #'
-data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
+data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area") {
   if (is.null(type)) {
     stop("Must provide a type argument of either network or site")
   }
@@ -27,37 +27,28 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
     stop("Must provide a type argument of either network or site")
   }
 
-  if (!(area %in% c("st_Anns_Bank_MPA", "musquash_MPA", "laurentian_Channel_MPA", "gully_MPA", "gilbert_MPA", "eastport_MPA",
-                    "basin_MPA", "bancsDesAmericains_MPA", "WEBCA"))) {
-    stop("Area must be either `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
-                    `basin_MPA`, `bancsDesAmericains_MPA`", "WEBCA")
-  }
-
   if (type == "network") {
-  urls <- "https://www.dfo-mpo.gc.ca/oceans/networks-reseaux/scotian-shelf-plateau-neo-ecossais-bay-baie-fundy/development-developpement-eng.html"
+    urls <- "https://www.dfo-mpo.gc.ca/oceans/networks-reseaux/scotian-shelf-plateau-neo-ecossais-bay-baie-fundy/development-developpement-eng.html"
   } else if (type == "site") {
-    if (area == "WEBCA") {
+    if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)") {
       urls <- 'https://www.dfo-mpo.gc.ca/oceans/oecm-amcepz/refuges/westernemerald-emeraudewestern-eng.html'
     } else {
-  if (area == "st_Anns_Bank_MPA") {
-    u <- "stanns-sainteanne"
-  } else if (area == "musquash_MPA") {
-    u <- "musquash"
-  } else if (area == "laurentian_Channel_MPA") {
-    u <- "laurentian-laurentien"
-  } else if (area == "gully_MPA") {
-    u <- "gully"
-  } else if (area == "gilbert_MPA") {
-    u <- "gilbert"
-  } else if (area == "eastport_MPA") {
-    u <- "eastport"
-  } else if (area == "basin_MPA") {
-    u <- "basin-head"
-  } else if (area == "bancsDesAmericains_MPA") {
-    u <- "american-americains"
-  }
+      if (area == "St. Anns Bank Marine Protected Area") {
+        u <- "stanns-sainteanne"
+      } else if (area == "Musquash Estuary, Private Land Component" ) {
+        u <- "musquash"
+      } else if (area == "Laurentian Channel Marine Protected Area") {
+        u <- "laurentian-laurentien"
+      } else if (area == "Gully Marine Protected Area") {
+        u <- "gully"
+      } else {
+        return(NULL)
+      }
+      # else if (area == "bancsDesAmericains_MPA") {
+      #   u <- "american-americains"
+      # }
 
-  urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
+      urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
     }
 
   } # End Site
@@ -67,48 +58,50 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
   lines <- strsplit(content(response[[1]], as="text"), "\n")
 
   if (type == "site") {
-  minLine <- which(grepl("Conservation Objectives", lines[[1]]))+1
-  maxLine <- which(grepl("Prohibitions", lines[[1]]))-1
+    minLine <- which(grepl("Conservation Objectives", lines[[1]]))+1
+    maxLine <- which(grepl("Prohibitions", lines[[1]]))-1
 
-  # Unique for bansDesAmericains
-  if (area == "bancsDesAmericains_MPA") {
-    minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Am\u00e9ricains Marine Protected are to:</p>\r")+2
-    maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
-  } else if (area == "WEBCA") {
-    minLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[1]
-    maxLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[2]
-  }
+    # Unique for bansDesAmericains
+    # if (area == "bancsDesAmericains_MPA") {
+    #   minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Am\u00e9ricains Marine Protected are to:</p>\r")+2
+    #   maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
+    # } else
 
-  final <- lines[[1]][minLine:maxLine]
-  if (any(final == "        </ul>\r" )) {
-    final <- final[-which(final == "        </ul>\r")]
-  }
-  if (any(final == "        <ul>\r")) {
-    final <- final[-which(final == "        <ul>\r")]
-  }
+    if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)" ) {
+      minLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[1]
+      maxLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[2]
+    }
 
-  if (any(final == "          <ul>\r")) {
-    final <- final[-which(final == "          <ul>\r")]
-  }
+    final <- lines[[1]][minLine:maxLine]
+    if (any(final == "        </ul>\r" )) {
+      final <- final[-which(final == "        </ul>\r")]
+    }
+    if (any(final == "        <ul>\r")) {
+      final <- final[-which(final == "        <ul>\r")]
+    }
 
-  if (any(final == "          </ul>\r")) {
-    final <- final[-which(final == "          </ul>\r")]
-  }
+    if (any(final == "          <ul>\r")) {
+      final <- final[-which(final == "          <ul>\r")]
+    }
 
-  final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
-  final <- sub("^[^>]*>", "", final) # remove everything before first >
+    if (any(final == "          </ul>\r")) {
+      final <- final[-which(final == "          </ul>\r")]
+    }
 
-  if (any(final == "          ")) {
-    final <- final[-which(final == "          ")]
-  }
+    final <- sub("^(.*)<[^<]*$", "\\1", final) # Remove everything after the last <
+    final <- sub("^[^>]*>", "", final) # remove everything before first >
 
-  if (any(final == "            ")) {
-    final <- final[-which(final == "            ")]
-  }
+    if (any(final == "          ")) {
+      final <- final[-which(final == "          ")]
+    }
 
-  if (any(final == "    ")) {
-    final <- final[-which(final == "    ")]
-  }
+    if (any(final == "            ")) {
+      final <- final[-which(final == "            ")]
+    }
+
+    if (any(final == "    ")) {
+      final <- final[-which(final == "    ")]
+    }
   } else if (type == "network") {
     minLine <- which(grepl("The objectives for the conservation", lines[[1]],ignore.case = TRUE))+2
     maxLine <- which(grepl("Selecting conservation priorities", lines[[1]], ignore.case = TRUE))-2
@@ -119,7 +112,7 @@ data_objectives <- function(type=NULL, area="st_Anns_Bank_MPA") {
   }
 
 
-  if (area == "WEBCA") {
+  if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)") {
     if (length(final) == 2) {
       source(file.path(Sys.getenv("OneDriveCommercial"),"MarConsNetTargets","data", "site_objectives", "webca.R"))
       final <- c(final, CO3)

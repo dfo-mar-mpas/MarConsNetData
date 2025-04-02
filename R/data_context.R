@@ -18,7 +18,7 @@
 #'
 #' @return a "sf" "dataframe" object
 #'
-data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
+data_context <- function(type=NULL, area="St. Anns Bank Marine Protected Area") {
   if (is.null(type)) {
     stop("Must provide a type argument of either network or site")
   }
@@ -27,39 +27,31 @@ data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
     stop("Must provide a type argument of either network or site")
   }
 
-  if (!(area %in% c("st_Anns_Bank_MPA", "musquash_MPA", "laurentian_Channel_MPA", "gully_MPA", "gilbert_MPA", "eastport_MPA",
-                    "basin_MPA", "bancsDesAmericains_MPA", "WEBCA"))) {
-    stop("Area must be either `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
-                    `basin_MPA_MPA`, `bancsDesAmericains_MPA` or `WEBCA`")
-  }
-
   if (type == "network") {
     urls <- "https://www.dfo-mpo.gc.ca/oceans/networks-reseaux/scotian-shelf-plateau-neo-ecossais-bay-baie-fundy/development-developpement-eng.html"
   } else if (type == "site") {
 
-    if (area == "WEBCA") {
+    if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)") {
       urls <- 'https://www.dfo-mpo.gc.ca/oceans/oecm-amcepz/refuges/westernemerald-emeraudewestern-eng.html'
 
     } else {
-    if (area == "st_Anns_Bank_MPA") {
-      u <- "stanns-sainteanne"
-    } else if (area == "musquash_MPA") {
-      u <- "musquash"
-    } else if (area == "laurentian_Channel_MPA") {
-      u <- "laurentian-laurentien"
-    } else if (area == "gully_MPA") {
-      u <- "gully"
-    } else if (area == "gilbert_MPA") {
-      u <- "gilbert"
-    } else if (area == "eastport_MPA") {
-      u <- "eastport"
-    } else if (area == "basin_MPA") {
-      u <- "basin-head"
-    } else if (area == "bancsDesAmericains_MPA") {
-      u <- "american-americains"
-    }
+      if (area == "St. Anns Bank Marine Protected Area") {
+        u <- "stanns-sainteanne"
+      } else if (area == "Musquash Estuary Marine Protected Area") {
+        u <- "musquash"
+      } else if (area == "Laurentian Channel Marine Protected Area") {
+        u <- "laurentian-laurentien"
+      } else if (area == "Gully Marine Protected Area") {
+        u <- "gully"
+      }  else {
+        return(NULL)
+      }
 
-    urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
+      # else if (area == "bancsDesAmericains_MPA") {
+      #   u <- "american-americains"
+      # }
+
+      urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
     }
 
   } # End Site
@@ -74,7 +66,7 @@ data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
       minLine <- minLine[1]  # Use only the first occurrence
     }
 
-    maxLine <- which(grepl("Conservation Objectives", lines[[1]], ignore.case=TRUE))
+    maxLine <- which(grepl("Conservation Objective", lines[[1]], ignore.case=TRUE))
     if (length(maxLine) > 0) {
       maxLine <- maxLine[1] - 1  # Use only the first occurrence and subtract 1
     }
@@ -100,8 +92,8 @@ data_context <- function(type=NULL, area="st_Anns_Bank_MPA") {
     final <- sub("^[^>]*>", "", final) # remove everything before first >
   }
 
-    if (any(final == "        ")) {
-       final <- final[-which(final == "        ")]
+  if (any(final == "        ")) {
+    final <- final[-which(final == "        ")]
   }
 
   #final <- sapply(final, function(x) paste0("- ", x, "\n"))
