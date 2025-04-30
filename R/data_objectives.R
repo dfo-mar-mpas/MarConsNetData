@@ -59,6 +59,9 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
 
   if (type == "site") {
     minLine <- which(grepl("Conservation Objectives", lines[[1]]))+1
+    if (length(minLine) == 0) {
+      minLine <- which(grepl("Conservation objectives", lines[[1]]))+1
+    }
     maxLine <- which(grepl("Prohibitions", lines[[1]]))-1
 
     # Unique for bansDesAmericains
