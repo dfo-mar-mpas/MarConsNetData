@@ -10,7 +10,7 @@ data_LFA(bioregion = "Scotian Shelf", layer = 14)
 \item{bioregion}{name of the bio region to match from the \code{NAME_E} column from \href{https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0}{Open Data}. Default is \code{"Scotian Shelf"}}
 
 \item{layer}{integer of the layer from Open Data to query. Defaults to 14 for the current (as of 2022) boundaries. See the
-\href{https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Historical_Lobster_Fishing_Districts_Maritimes_Region/Mapserver}{REST server} for additional options}
+\href{https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/historical_lobster_fishing_districts_maritimes_region/MapServer/}{REST server} for additional options}
 }
 \value{
 sf data.frame

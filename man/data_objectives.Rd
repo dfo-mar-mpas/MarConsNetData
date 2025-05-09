@@ -4,7 +4,7 @@
 \alias{data_objectives}
 \title{Get Objectives from Canadian Protected and Conserved Areas}
 \usage{
-data_objectives(type = NULL, area = "st_Anns_Bank_MPA")
+data_objectives(type = NULL, area = "St. Anns Bank Marine Protected Area")
 }
 \arguments{
 \item{type}{argument of either \code{site} or \code{network} indicating which objectives to obtain}

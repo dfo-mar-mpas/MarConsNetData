@@ -7,7 +7,7 @@
 data_bioregion(bioregion = "Scotian Shelf")
 }
 \arguments{
-\item{bioregion}{name of the bio region to match from the \code{NAME_E} column from \href{https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0}{Open Data} or one of the Ocean Basins to return multiple bioregions (i.e. "Atlantic"). Default is \code{"Scotian Shelf"}}
+\item{bioregion}{name of the bio region to match from the \code{NAME_E} column from \href{https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/federal_marine_bioregions_bioregions_marines_federales/MapServer/0}{Open Data} or one of the Ocean Basins to return multiple bioregions (i.e. "Atlantic") or "All" to return all available bioregions. Default is \code{"Scotian Shelf"}}
 }
 \value{
 sf data.frame
@@ -15,7 +15,7 @@ sf data.frame
 \description{
 This function pulls information (length, area, shape, etc.) about
 number of bio regions. For a list of available options visit
-https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Federal_Marine_Bioregions/MapServer/0
+https://open.canada.ca/data/en/dataset/23eb8b56-dac8-4efc-be7c-b8fa11ba62e9
 }
 \examples{
 \dontrun{

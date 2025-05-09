@@ -4,7 +4,7 @@
 \alias{data_context}
 \title{Get Context from Canadian Protected and Conserved Areas}
 \usage{
-data_context(type = NULL, area = "st_Anns_Bank_MPA")
+data_context(type = NULL, area = "St. Anns Bank Marine Protected Area")
 }
 \arguments{
 \item{type}{argument of either \code{site} or \code{network} indicating which objectives to obtain}

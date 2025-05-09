@@ -13,7 +13,9 @@ data_SAR_CH(bioregion)
 "sf" "data.frame" object
 }
 \description{
-Get Species at Risk Critical Habitat Data
+This function gets the Critical Habitat for Aquatic Species at Risk
+in the specified bio region. For more information see
+https://open.canada.ca/data/en/dataset/db177a8c-5d7d-49eb-8290-31e6a45d786c
 }
 \examples{
 \dontrun{
