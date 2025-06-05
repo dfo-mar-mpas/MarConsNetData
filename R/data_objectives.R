@@ -4,9 +4,7 @@
 #' Canadian protected and conserved areas in the Scotian Shelf bio region.
 #'
 #' @param type argument of either `site` or `network` indicating which objectives to obtain
-#' @param area a name of an area of which to obtain the objectives from. Options include
-#' `st_Anns_Bank_MPA`, `musquash_MPA`, `laurentian_Channel_MPA`, `gully_MPA`, `gilbert_MPA`, `eastport_MPA`,
-#' `basin_MPA`, `bancsDesAmericains_MPA`, `WEBCA`
+#' @param area a name of an area of which to obtain the objectives from.
 #' @importFrom rvest read_html
 #' @importFrom httr GET content
 #' @export
@@ -35,7 +33,7 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
     } else {
       if (area == "St. Anns Bank Marine Protected Area") {
         u <- "stanns-sainteanne"
-      } else if (area == "Musquash Estuary, Private Land Component" ) {
+      } else if (area == "Musquash Estuary Marine Protected Area") {
         u <- "musquash"
       } else if (area == "Laurentian Channel Marine Protected Area") {
         u <- "laurentian-laurentien"
