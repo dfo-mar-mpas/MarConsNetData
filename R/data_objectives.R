@@ -5,6 +5,7 @@
 #'
 #' @param type argument of either `site` or `network` indicating which objectives to obtain
 #' @param area a name of an area of which to obtain the objectives from.
+#' @param prohibiton a boolean indicating if you want the prohibition included
 #' @importFrom rvest read_html
 #' @importFrom httr GET content
 #' @export
@@ -16,7 +17,7 @@
 #'
 #' @return a "sf" "dataframe" object
 #'
-data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area") {
+data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area", prohibiton=FALSE) {
   if (is.null(type)) {
     stop("Must provide a type argument of either network or site")
   }
@@ -39,12 +40,29 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
         u <- "laurentian-laurentien"
       } else if (area == "Gully Marine Protected Area") {
         u <- "gully"
+      } else if (area =="Banc-des-Américains Marine Protected Area") {
+        u <- "american-americains"
+      } else if (area == "Basin Head Marine Protected Area") {
+        u <- "basin-head"
+      } else if (area == "Eastport – Round Island Marine Protected Area") {
+        u <- "eastport"
+      } else if (area == "Gilbert Bay Marine Protected Area") {
+        u <- "gilbert"
+      } else if (area == "Anguniaqvia niqiqyuam Marine Protected Area") {
+        u <- "anguniaqvia-niqiqyuam"
+      } else if (area == "Tarium Niryutait Marine Protected Area") {
+        u <- "tarium-niryutait"
+      } else if (area == "Tuvaijuittuq Marine Protected Area") {
+        u <- "tuvaijuittuq"
+      } else if (area == "Hecate Strait/Queen Charlotte Sound Glass Sponge Reefs Marine Protected Area") {
+        u <- "hecate-charlotte"
+      } else if (area == "Sgaan Kinghlas-Bowie Seamount Marine Protected Area") {
+        u <- "sgaan-kinghlas-bowie"
+      } else if (area == "Tanggwan - hacxwiquak-Tsigis Marine Protected Area") {
+        u <- "tht"
       } else {
         return(NULL)
       }
-      # else if (area == "bancsDesAmericains_MPA") {
-      #   u <- "american-americains"
-      # }
 
       urls <- paste0("https://www.dfo-mpo.gc.ca/oceans/mpa-zpm/",u,"/index-eng.html")
     }
@@ -60,13 +78,19 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
     if (length(minLine) == 0) {
       minLine <- which(grepl("Conservation objectives", lines[[1]]))+1
     }
+    if (length(minLine) == 0) {
+      minLine <- which(grepl("Conservation objective", lines[[1]]))+1
+    }
     maxLine <- which(grepl("Prohibitions", lines[[1]]))-1
+    if (length(maxLine) == 0) {
+      maxLine <- which(grepl("Environmental context", lines[[1]]) & grepl("h2", lines[[1]]))-1
+    }
 
     # Unique for bansDesAmericains
-    # if (area == "bancsDesAmericains_MPA") {
-    #   minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Am\u00e9ricains Marine Protected are to:</p>\r")+2
-    #   maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
-    # } else
+    if (area == "Banc-des-Américains Marine Protected Area") {
+      minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Am\u00e9ricains Marine Protected are to:</p>\r")+2
+      maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
+    }
 
     if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)" ) {
       minLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[1]
@@ -122,6 +146,30 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
 
   final <- paste0("-", final, "\n")
 
+  if (prohibiton) {
+    prohibiton_start <- which(grepl("Prohibitions", lines[[1]]))
+    if (length(prohibiton_start) > 1) {
+      prohibiton_start <- prohibiton_start[2]
+    }
+    if (length(prohibiton_start) == 0) {
+      prohibiton_start <- maxLine
+    }
+    prohibiton_start <- prohibiton_start+1
+    prohibiton_lines <- lines[[1]][prohibiton_start:length(lines[[1]])]
 
+    prov_end <- which(grepl("Ecosystem", prohibiton_lines) & grepl("h2", prohibiton_lines))-1
+
+    if (length(prov_end) == 0) {
+      prov_end <- which(grepl("Key objectives and approach", prohibiton_lines) & grepl("h2", prohibiton_lines))-1
+    }
+
+    PROHIBITION <- prohibiton_lines[1:prov_end]
+  }
+
+  if (!(prohibiton)) {
   return(final)
+  } else {
+
+    df <- data.frame(mpa=area, objectives=paste0(paste0("<p>", gsub(pattern = "\n", replacement = "</p>", x=final)), collapse=" "), prohibiton=paste0(PROHIBITION, collapse=" "))
+  }
 }
