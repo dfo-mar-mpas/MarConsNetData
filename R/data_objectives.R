@@ -29,7 +29,7 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
   if (type == "network") {
     urls <- "https://www.dfo-mpo.gc.ca/oceans/networks-reseaux/scotian-shelf-plateau-neo-ecossais-bay-baie-fundy/development-developpement-eng.html"
   } else if (type == "site") {
-    if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)") {
+    if (area == "Western and Emerald Banks Marine Refuge") {
       urls <- 'https://www.dfo-mpo.gc.ca/oceans/oecm-amcepz/refuges/westernemerald-emeraudewestern-eng.html'
     } else {
       if (area == "St. Anns Bank Marine Protected Area") {
@@ -92,7 +92,7 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
       maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
     }
 
-    if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)" ) {
+    if (area == "Western and Emerald Banks Marine Refuge") {
       minLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[1]
       maxLine <- which(grepl("support", lines[[1]], ignore.case=TRUE))[2]
     }
@@ -137,7 +137,7 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
   }
 
 
-  if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)") {
+  if (area == "Western and Emerald Banks Marine Refuge") {
     if (length(final) == 2) {
       source(file.path(Sys.getenv("OneDriveCommercial"),"MarConsNetTargets","data", "site_objectives", "webca.R"))
       final <- c(final, CO3)

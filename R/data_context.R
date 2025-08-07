@@ -31,7 +31,7 @@ data_context <- function(type=NULL, area="St. Anns Bank Marine Protected Area") 
     urls <- "https://www.dfo-mpo.gc.ca/oceans/networks-reseaux/scotian-shelf-plateau-neo-ecossais-bay-baie-fundy/development-developpement-eng.html"
   } else if (type == "site") {
 
-    if (area == "Western/Emerald Banks Conservation Area (Restricted Fisheries Zone)") {
+    if (area == "Western and Emerald Banks Marine Refuge") {
       urls <- 'https://www.dfo-mpo.gc.ca/oceans/oecm-amcepz/refuges/westernemerald-emeraudewestern-eng.html'
 
     } else {
