@@ -4,14 +4,18 @@
 \alias{data_objectives}
 \title{Get Objectives from Canadian Protected and Conserved Areas}
 \usage{
-data_objectives(type = NULL, area = "St. Anns Bank Marine Protected Area")
+data_objectives(
+  type = NULL,
+  area = "St. Anns Bank Marine Protected Area",
+  prohibiton = FALSE
+)
 }
 \arguments{
 \item{type}{argument of either \code{site} or \code{network} indicating which objectives to obtain}
 
-\item{area}{a name of an area of which to obtain the objectives from. Options include
-\code{st_Anns_Bank_MPA}, \code{musquash_MPA}, \code{laurentian_Channel_MPA}, \code{gully_MPA}, \code{gilbert_MPA}, \code{eastport_MPA},
-\code{basin_MPA}, \code{bancsDesAmericains_MPA}, \code{WEBCA}}
+\item{area}{a name of an area of which to obtain the objectives from.}
+
+\item{prohibiton}{a boolean indicating if you want the prohibition included}
 }
 \value{
 a "sf" "dataframe" object
