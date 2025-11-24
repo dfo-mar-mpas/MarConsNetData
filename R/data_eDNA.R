@@ -178,13 +178,42 @@ data_eDNA <- function() {
                          location=NA)
 
         for (l in seq_along(df$ID)) { ## CYCLE THROUGH EACH SAMPLE FOR EACH SAMPLE TYPE
-          message("l= ", l)
+          #message("l= ", l)
 
 
           keep <- which(metadata$materialSampleID == df$ID[l])
 
           if (!(length(keep) == 0)) {
+
             df$date[l] <- as.Date(metadata$eventDate[keep], "%m/%d/%Y")
+
+            # DATE NOT CONSISTENT, NJ
+
+            if (is.na(df$date[l])) {
+              is_date_format <- function(x, format) {
+                !is.na(as.Date(x, format = format))
+              }
+
+              if (is_date_format(metadata$eventDate[keep], "%b %d %Y")) {
+                #browser()
+                # Handing "Aug 6 2022" date.
+                df$date[l] <-as.Date(metadata$eventDate[keep], format = "%b %d %Y")
+                df$date[l] <- gsub("-", "/", df$date[l])
+
+              } else if (metadata$eventDate[keep] == "") {
+                #Find the one before it that is not ""
+                # if (k == 2 && j == 2) {
+                # browser()
+                # }
+                date_of_interest <- metadata$eventDate[max(which(metadata$eventDate[1:(keep-1)] != ""))]
+                df$date[l] <- as.Date(date_of_interest, format = "%m/%d/%Y")
+                df$date[l] <- gsub("-", "/", df$date[l])
+
+              } else {
+                browser()
+              }
+            }
+
 
             if ("decimalLatitude" %in% names(metadata)) {
               df$latitude[l] <- metadata$decimalLatitude[keep]
