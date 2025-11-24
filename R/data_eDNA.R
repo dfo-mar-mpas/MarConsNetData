@@ -69,6 +69,10 @@ data_eDNA <- function() {
   )
 
   paths <- sub(".*eDNA-for-MPAs/data/", "", eDNA_csv)
+
+  if (substr(paths[1], 1, 1) == "/") {
+    paths <- substr(paths, 2, nchar(paths))
+  }
   cruise <- sub("/.*", "", paths)
   grouped <- split(eDNA_csv, cruise)
 
