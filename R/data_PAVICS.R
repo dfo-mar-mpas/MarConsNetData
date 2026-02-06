@@ -18,7 +18,6 @@
 #' @importFrom stars read_ncdf
 #' @importFrom sf st_crs
 #' @importFrom sf st_bbox
-#' @importFrom PCICt as.PCICt
 #'
 #' @examples
 #' \dontrun{
@@ -84,13 +83,8 @@ data_PAVICS <- function(OPENDAP_url = "https://pavics.ouranos.ca/twitcher/ows/pr
 
     endday <- as.numeric(as.Date(end_date) - base_date)
   }  else if ("proleptic_gregorian" == nc_data$dim$time$calendar) {
-    startday <- as.numeric(difftime(as.PCICt(first_date, cal = "proleptic_gregorian"),
-                                    as.PCICt(as.character(base_date), cal = "proleptic_gregorian"),
-                                    "days"))
-
-    endday <- as.numeric(difftime(as.PCICt(end_date, cal = "proleptic_gregorian"),
-                                  as.PCICt(as.character(base_date), cal = "proleptic_gregorian"),
-                                  "days"))
+    startday <- as.numeric(as.Date(first_date) - base_date)
+    endday <- as.numeric(as.Date(end_date) - base_date)
   } else {
     stop(paste0("This function is not designed to handle this calendar type:",nc_data$dim$time$calendar))
   }
