@@ -1,0 +1,39 @@
+# obis
+
+``` r
+library(MarConsNetData)
+```
+
+``` r
+bioregion <- data_bioregion()
+areas <- data_CPCAD_areas(bioregion,zones=FALSE)
+
+
+fn <- "obis_bioregion.RDS"
+if(!file.exists(fn)){
+  obis_bioregion <- data_OBIS(bioregion)
+  saveRDS(obis_bioregion,fn)
+} else {
+  readRDS(fn)
+}
+
+fn <- "obis_areas.RDS"
+if(!file.exists(fn)){
+  obis_areas <- data_OBIS(areas)
+  saveRDS(obis_areas,fn)
+} else {
+  readRDS(fn)
+}
+```
+
+``` r
+obis_areas <- obis |>
+    sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
+                 crs = 4326,
+                 remove = FALSE) |> 
+  sf::st_intersection(areas)
+
+obis_areas <- obis_areas |> 
+  as.data.frame() |> 
+  select(-geometry)
+```

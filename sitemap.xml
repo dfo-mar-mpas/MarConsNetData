@@ -5,7 +5,6 @@
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/authors.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/index.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/MarConsNetData-package.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/dataTable.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_CPCAD_areas.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_DFO_sp_lists.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_EBSA.html</loc></url>
@@ -21,18 +20,11 @@
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_commercial_fishing.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_context.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_draft_areas.html</loc></url>
+<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_eDNA.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_geomorphic_units.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_indicators.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_objectives.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_planning_areas.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/get_project_data.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/index.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_AZMP.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_AZMP_old.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_eDNAMetabarcoding.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_optimizingeDNA.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_snowCrabSurvey.html</loc></url>
-<url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/project_whale_biodiversity.html</loc></url>
 <url><loc>https://dfo-mar-mpas.github.io/MarConsNetData/reference/taxize_data.html</loc></url>
 </urlset>
 
