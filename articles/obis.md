@@ -1,10 +1,12 @@
 # obis
 
 ``` r
+
 library(MarConsNetData)
 ```
 
 ``` r
+
 bioregion <- data_bioregion()
 areas <- data_CPCAD_areas(bioregion,zones=FALSE)
 
@@ -27,6 +29,7 @@ if(!file.exists(fn)){
 ```
 
 ``` r
+
 obis_areas <- obis |>
     sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
                  crs = 4326,

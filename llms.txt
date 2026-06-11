@@ -9,6 +9,7 @@ You can install the development version of MarConsNetData from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("dfo-mar-mpas/MarConsNetData")
 ```
@@ -18,6 +19,7 @@ remotes::install_github("dfo-mar-mpas/MarConsNetData")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
+
 library(MarConsNetData)
 
 bioregion <- data_bioregion()
