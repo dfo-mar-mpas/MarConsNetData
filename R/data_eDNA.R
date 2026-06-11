@@ -59,8 +59,6 @@
 #' }
 #'
 #' @export
-
-
 data_eDNA <- function(token=NULL) {
 
   if (is.null(token)) {
@@ -77,63 +75,71 @@ data_eDNA <- function(token=NULL) {
 
   files <- jsonlite::fromJSON(content(res, "text"), flatten = TRUE)
 
-  # Step 1: get directories
-  dirs <- files$url[files$type == "dir"]
 
-  # Step 2: loop into them
-  get_files_recursive <- function(url, token) {
+  ### START NEW
+
+  dirs <- files[which(files$type == 'dir'),] ## All of the directories in the repository
+
+  ## Now we need to look at any files that that start with "GOTeDNA.*\\.csv$" - > NJ: Is this needed?
+  get_gotedna_files <- function(url, token, depth = 1) {
+
+    message("Currently at depth ", depth)
 
     res <- httr::GET(
       url,
       httr::add_headers(Authorization = paste("token", token))
     )
 
-    files <- jsonlite::fromJSON(content(res, "text"), flatten = TRUE)
+    items <- jsonlite::fromJSON(
+      httr::content(res, "text"),
+      flatten = TRUE
+    )
 
     out <- c()
 
-    for (i in seq_len(nrow(files))) {
+    for (i in seq_len(nrow(items))) {
 
-      if (files$type[i] == "file" &&
-          grepl("GOTeDNA.*\\.csv$", files$name[i], ignore.case = TRUE)) {
+      if (items$type[i] == "file" &&
+          grepl("^GOTeDNA.*\\.csv$", items$name[i], ignore.case = TRUE)) {
 
-        out <- c(out, files$download_url[i])
+        out <- c(out, items$download_url[i])
 
-      } else if (files$type[i] == "dir") {
+      }
 
-        out <- c(out, get_files_recursive(files$url[i], token))  # 🔴 recursion
+      if (items$type[i] == "dir") {
 
+        message(
+          paste0(
+            strrep("  ", depth - 1),
+            "Entering depth ", depth + 1,
+            ": ", items$name[i]
+          )
+        )
+
+        out <- c(
+          out,
+          get_gotedna_files(
+            items$url[i],
+            token,
+            depth = depth + 1
+          )
+        )
       }
     }
 
-    return(out)
+    out
   }
 
-  eDNA_csv <- get_files_recursive(api_url, token)
+  eDNA_csv <- get_gotedna_files(api_url, token)
+
   paths <- sub(".*data/", "", eDNA_csv)
 
-
-
-  # OLD
-#
-#   root <- "../eDNA-for-MPAs/data/"
-#
-#   # Get all CSVs that contain 'GOTeDNA' anywhere in the full path
-#   eDNA_csv <- list.files(
-#     path = root,
-#     pattern = "GOTeDNA.*\\.csv$",
-#     full.names = TRUE,
-#     recursive = TRUE,
-#     ignore.case = TRUE
-#   )
-#
-#   paths <- sub(".*eDNA-for-MPAs/data/", "", eDNA_csv)
 
   if (substr(paths[1], 1, 1) == "/") {
     paths <- substr(paths, 2, nchar(paths))
   }
   cruise <- sub("/.*", "", paths)
-  grouped <- split(eDNA_csv, cruise)
+  grouped <- split(eDNA_csv, cruise) ## GROUPED BY CRUISE (BASED ON NAMING CONVENTION)
 
 
   big_df <- list()
@@ -141,7 +147,7 @@ data_eDNA <- function(token=NULL) {
 
 
   for (i in seq_along(grouped)) { # GROUP BY CRUISE MISSION
-    message("i= ", i)
+    message("i= ", i, " with cruise mission = ", names(grouped[i]))
 
     METADATA <- grouped[[i]][which(grepl("Metadata", grouped[[i]], ignore.case=TRUE))]
 
@@ -150,6 +156,7 @@ data_eDNA <- function(token=NULL) {
     location <- sub(".*data/[^/]+/([^/]+)/.*", "\\1", METADATA)
 
     if (any(grepl("GOTeDNA", location, ignore.case=TRUE))) {
+      message("Bad location for ", i)
       # FORMATTED INCORRECT (NJ)
       bad_location <- which(grepl("GOTeDNA", location, ignore.case=TRUE))
 
@@ -175,13 +182,13 @@ data_eDNA <- function(token=NULL) {
     }
 
     for (j in seq_along(location)) { # CYCLE THROUGH ALL LOCATIONS ON CRUISE MISSION
-      message("j= ", j)
-      keepj <- which(grepl(location[j], DATA, ignore.case=TRUE))
+      message("j= ", j, " with location = ", location[j])
+      keepj <- which(grepl(location[j], DATA, ignore.case=TRUE)) ## ONLY LOOKING AT DATA FROM ONE LOCATION
 
       for (k in seq_along(keepj)) { # CYCLE THROUGH ALL SAMPLE TYPES AT EACH LOCATION FOR EACH MISSION
 
         ## FIXME: SHOULD LOOK INTO THIS
-        message("k= ", k)
+        message("k= ", k, " which is all sample types at each location for each mission (e.g. 16S)")
 
         name_of_data <- DATA[keepj][k]
         data <- read.csv(name_of_data)
@@ -214,19 +221,40 @@ data_eDNA <- function(token=NULL) {
           metadata$materialSampleID[which(!(grepl("AZMP", metadata$materialSampleID)))] <- metadata$eDNA_Tube[which(!(grepl("AZMP", metadata$materialSampleID)))]
 
           HIT_IDs <- names(data)[which(names(data) %in% metadata$materialSampleID)]
-
-
-
         }
 
-        if (length(HIT_IDs) < 5) {
-          # ONLY 5 SAMPLES MATCH. THIS IS A BANDAID FIX
-          #length_5_keep <- which(!(metadata$materialSampleID) %in% names(data))
-          length_5_keep <- which(!(metadata$materialSampleID %in% names(data)))
+        # if (length(HIT_IDs) < 5) {
+        #   # ONLY 5 SAMPLES MATCH. THIS IS A BANDAID FIX
+        #   #length_5_keep <- which(!(metadata$materialSampleID) %in% names(data))
+        #   length_5_keep <- which(!(metadata$materialSampleID %in% names(data)))
+        #
+        #   metadata$materialSampleID[length_5_keep] <- gsub("_", ".", metadata$materialSampleID[length_5_keep])
+        #   HIT_IDs <- names(data)[which(names(data) %in% metadata$materialSampleID)]
+        #
+        # }
 
-          metadata$materialSampleID[length_5_keep] <- gsub("_", ".", metadata$materialSampleID[length_5_keep])
-          HIT_IDs <- names(data)[which(names(data) %in% metadata$materialSampleID)]
+        ## MAKING A SAFETY CHECK THAT ENSURES ANY DATA THAT DOES NOT HAVE METADATA IS ALL 0
+        missing_samples <- names(data)[
+          grepl("sample", names(data), ignore.case = TRUE) &
+            !names(data) %in% metadata$materialSampleID &
+            vapply(data, function(x) !all(x == 0, na.rm = TRUE), logical(1))
+        ]
 
+        if (length(missing_samples) > 0) {
+          if (!(i == 1)) {
+            browser()
+
+            ## TESTING
+            name_of_data
+            METADATA[j]
+            names(data)[!(which(names(data) %in% metadata$materialSampleID))]
+            uniques <- lapply(missing_samples, function(x) unique(data[[x]]))
+            names(uniques) <- missing_samples
+            uniques
+
+
+            stop("There is a dataset that does not have an associated metadata and is not all 0s. This is for i = ", i, " j = ",j, " k = ", k)
+          }
         }
 
 
@@ -240,10 +268,9 @@ data_eDNA <- function(token=NULL) {
                          method=NA,
                          location=NA)
 
+
         for (l in seq_along(df$ID)) { ## CYCLE THROUGH EACH SAMPLE FOR EACH SAMPLE TYPE
           message("l= ", l)
-
-
           keep <- which(metadata$materialSampleID == df$ID[l])
 
           if (!(length(keep) == 0)) {
@@ -280,9 +307,6 @@ data_eDNA <- function(token=NULL) {
               }
             }
 
-            #browser()
-
-
             if ("decimalLatitude" %in% names(metadata)) {
               df$latitude[l] <- metadata$decimalLatitude[keep]
               df$longitude[l] <- metadata$decimalLongitude[keep]
@@ -290,8 +314,8 @@ data_eDNA <- function(token=NULL) {
               df$latitude[l] <- metadata$Lat[keep]
               df$longitude[l] <- metadata$Long[keep]
             } else if ('latitudeMinutes' %in% names(metadata)) {
-              df$latitude[l] <- metadata$latitudeDegrees + metadata$latitudeMinutes / 60
-              df$longitude[l] <- metadata$longitudeDegrees + metadata$longitudeMinutes / 60
+              df$latitude[l] <- metadata$latitudeDegrees[keep] + metadata$latitudeMinutes[keep] / 60
+              df$longitude[l] <- metadata$longitudeDegrees[keep] + metadata$longitudeMinutes[keep] / 60
             } else {
               message("This is browser 3")
 
@@ -345,6 +369,8 @@ data_eDNA <- function(token=NULL) {
   final_df <- do.call(rbind, big_df)
   final_df$latitude <- round(as.numeric(final_df$latitude), 2)
   final_df$longitude <- round(as.numeric(final_df$longitude), 2)
+
+  browser()
 
   b1 <- which(is.na(final_df$latitude))
   b2 <- which(is.na(final_df$longitude))
