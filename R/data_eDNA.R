@@ -370,7 +370,6 @@ data_eDNA <- function(token=NULL) {
   final_df$latitude <- round(as.numeric(final_df$latitude), 2)
   final_df$longitude <- round(as.numeric(final_df$longitude), 2)
 
-  browser()
 
   b1 <- which(is.na(final_df$latitude))
   b2 <- which(is.na(final_df$longitude))
