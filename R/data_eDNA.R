@@ -100,7 +100,7 @@ data_eDNA <- function(token=NULL) {
     for (i in seq_len(nrow(items))) {
 
       if (items$type[i] == "file" &&
-          grepl("^GOTeDNA.*\\.csv$", items$name[i], ignore.case = TRUE)) {
+          grepl("GOTeDNA.*\\.csv$", items$name[i], ignore.case = TRUE)) {
 
         out <- c(out, items$download_url[i])
 
@@ -173,11 +173,17 @@ data_eDNA <- function(token=NULL) {
         ) ]
 
         if (length(hits) == 0) {
+
+          if (names(grouped[i]) == '2025RVsurvey') {
+            location <- '2025RVsurvey'
+          } else {
           stop("There was a new location added, and formatting is incorrect.")
+          }
         }
       }
-
+      if (!(names(grouped[i]) == '2025RVsurvey')) {
       location[bad_location] <- hits
+      }
 
     }
 
@@ -223,16 +229,6 @@ data_eDNA <- function(token=NULL) {
           HIT_IDs <- names(data)[which(names(data) %in% metadata$materialSampleID)]
         }
 
-        # if (length(HIT_IDs) < 5) {
-        #   # ONLY 5 SAMPLES MATCH. THIS IS A BANDAID FIX
-        #   #length_5_keep <- which(!(metadata$materialSampleID) %in% names(data))
-        #   length_5_keep <- which(!(metadata$materialSampleID %in% names(data)))
-        #
-        #   metadata$materialSampleID[length_5_keep] <- gsub("_", ".", metadata$materialSampleID[length_5_keep])
-        #   HIT_IDs <- names(data)[which(names(data) %in% metadata$materialSampleID)]
-        #
-        # }
-
         ## MAKING A SAFETY CHECK THAT ENSURES ANY DATA THAT DOES NOT HAVE METADATA IS ALL 0
         missing_samples <- names(data)[
           grepl("sample", names(data), ignore.case = TRUE) &
@@ -268,6 +264,10 @@ data_eDNA <- function(token=NULL) {
                          method=NA,
                          location=NA)
 
+        if (names(grouped[i]) == "2025RVsurvey") {
+          df$location <- metadata$MPA[which(metadata$materialSampleID %in% HIT_IDs)]
+        }
+
 
         for (l in seq_along(df$ID)) { ## CYCLE THROUGH EACH SAMPLE FOR EACH SAMPLE TYPE
           message("l= ", l)
@@ -300,6 +300,13 @@ data_eDNA <- function(token=NULL) {
                 df$date[l] <- as.Date(date_of_interest, format = "%m/%d/%Y")
                 df$date[l] <- gsub("-", "/", df$date[l])
 
+              } else if (grepl("^[A-Za-z]{3}-\\d{2}$", metadata$eventDate[keep])) {
+
+                assigned_year <-  unique(stringr::str_extract(DATA, "\\d{4}"))
+
+                df$date[l] <- as.Date(paste0(metadata$eventDate[keep], "-", assigned_year), format = "%b-%d-%Y")
+
+
               } else {
                 message("This is browser 2")
 
@@ -316,7 +323,10 @@ data_eDNA <- function(token=NULL) {
             } else if ('latitudeMinutes' %in% names(metadata)) {
               df$latitude[l] <- metadata$latitudeDegrees[keep] + metadata$latitudeMinutes[keep] / 60
               df$longitude[l] <- metadata$longitudeDegrees[keep] + metadata$longitudeMinutes[keep] / 60
-            } else {
+            } else if ('latitude' %in% names(metadata)) {
+              df$latitude[l] <- metadata$latitude[keep]
+              df$longitude[l] <- metadata$longitude[keep]
+              } else {
               message("This is browser 3")
 
               browser(3)
@@ -332,7 +342,12 @@ data_eDNA <- function(token=NULL) {
               names(data)[which(names(data) == "species")] <- "Species"
 
               if (!("Species" %in% names(data))) {
+                if ("V6" %in% names(data)) {
                 names(data)[which(names(data) == "V6")] <- "Species"
+                } else if ("X6" %in% names(data)) {
+                  names(data)[which(names(data) == "X6")] <- "Species"
+
+                }
               }
 
               if (!("Species" %in% names(data))) {
@@ -344,7 +359,10 @@ data_eDNA <- function(token=NULL) {
             df$species_richness[l] <- length(unique(data$Species[which(!(ACTUAL_DATA == 0))]))
             #df$method[l] <- sub(".*eDNA-for-MPAs/data/[^/]+/[^/]+/([^/]+).*", "\\1", name_of_data)
             df$method[l] <- sub(".*data/[^/]+/[^/]+/([^/]+).*", "\\1", name_of_data)
-            df$location[l] <- location[j]
+            if (!(names(grouped[i]) == "2025RVsurvey")) {
+              df$location[l] <- location[j]
+            }
+
 
 
             ## and add everything to main mega table.
