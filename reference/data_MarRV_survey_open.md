@@ -25,6 +25,10 @@ list of data.frames or sf data.frame
 
 ``` r
 summer <- data_MarRV_survey_open()
+#> Warning: URL 'https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/1366e1f1-e2c8-4905-89ae-e10f1be0a164/attachments/SUMMER_csv.zip': status was 'SSL peer certificate or SSH remote key was not OK'
+#> Error in download.file("https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/1366e1f1-e2c8-4905-89ae-e10f1be0a164/attachments/SUMMER_csv.zip",     tmp): cannot open URL 'https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/1366e1f1-e2c8-4905-89ae-e10f1be0a164/attachments/SUMMER_csv.zip'
 
 fall <- data_MarRV_survey_open(survey="fall")
+#> Warning: URL 'https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/5f82b379-c1e5-4a02-b825-f34fc645a529/attachments/FALL_csv.zip': status was 'SSL peer certificate or SSH remote key was not OK'
+#> Error in download.file("https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/5f82b379-c1e5-4a02-b825-f34fc645a529/attachments/FALL_csv.zip",     tmp): cannot open URL 'https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/5f82b379-c1e5-4a02-b825-f34fc645a529/attachments/FALL_csv.zip'
 ```
