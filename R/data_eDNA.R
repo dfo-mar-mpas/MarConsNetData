@@ -262,7 +262,9 @@ data_eDNA <- function(token=NULL) {
                          longitude=NA,
                          species_richness=NA,
                          method=NA,
-                         location=NA)
+                         location=NA,
+                         species=NA,
+                         abundance=NA)
 
         if (names(grouped[i]) == "2025RVsurvey") {
           df$location <- metadata$MPA[which(metadata$materialSampleID %in% HIT_IDs)]
@@ -330,11 +332,14 @@ data_eDNA <- function(token=NULL) {
               message("This is browser 3")
 
               browser(3)
-            }
+              }
+
 
 
 
             ACTUAL_DATA <- data[[df$ID[l]]]
+
+
 
             # NOT CONSISTENT NAMING (v6 NJ)
 
@@ -362,6 +367,19 @@ data_eDNA <- function(token=NULL) {
             if (!(names(grouped[i]) == "2025RVsurvey")) {
               df$location[l] <- location[j]
             }
+
+            species_and_abundance <- data[, c("Species", df$ID[l]), drop = FALSE]
+
+            species_unique <- species_and_abundance %>%
+              group_by(Species) %>%
+              summarise(Abundance = sum(.data[[df$ID[l]]]), .groups = "drop") %>%
+              filter(Abundance > 0)
+
+            if (nrow(species_unique) > 0) {
+              df$species[l] <- paste0(species_unique$Species, collapse=', ')
+              df$abundance[l] <- paste0(species_unique$Abundance, collapse=', ')
+            }
+
 
 
 
