@@ -264,7 +264,7 @@ data_eDNA <- function(token=NULL) {
                          method=NA,
                          location=NA,
                          species=NA,
-                         abundance=NA)
+                         detections=NA)
 
         if (names(grouped[i]) == "2025RVsurvey") {
           df$location <- metadata$MPA[which(metadata$materialSampleID %in% HIT_IDs)]
@@ -368,16 +368,16 @@ data_eDNA <- function(token=NULL) {
               df$location[l] <- location[j]
             }
 
-            species_and_abundance <- data[, c("Species", df$ID[l]), drop = FALSE]
+            species_and_detections <- data[, c("Species", df$ID[l]), drop = FALSE]
 
-            species_unique <- species_and_abundance %>%
+            species_unique <- species_and_detections %>%
               group_by(Species) %>%
-              summarise(Abundance = sum(.data[[df$ID[l]]]), .groups = "drop") %>%
-              filter(Abundance > 0)
+              summarise(detections = sum(.data[[df$ID[l]]]), .groups = "drop") %>%
+              filter(detections > 0)
 
             if (nrow(species_unique) > 0) {
               df$species[l] <- paste0(species_unique$Species, collapse=', ')
-              df$abundance[l] <- paste0(species_unique$Abundance, collapse=', ')
+              df$detections[l] <- paste0(species_unique$detections, collapse=', ')
             }
 
 
@@ -417,14 +417,19 @@ data_eDNA <- function(token=NULL) {
 
   final_df$longitude[which(final_df$longitude > 0)] <- final_df$longitude[which(final_df$longitude > 0)]*-1
 
-  # leaflet() %>%
-  #   addTiles() %>%
-  #   addCircleMarkers(
-  #     lat = final_df$latitude,
-  #     lng = final_df$longitude,
-  #     popup = paste0("Lat: ", final_df$latitude,
-  #                    "<br>Lon: ", final_df$longitude)
-  #   )
+
+  final_df <- final_df |>
+    separate_rows(species, detections, sep = ",\\s*") |>
+    mutate(
+      detections = as.numeric(detections),
+      species = species |>
+        tolower() |>
+        trimws() |>
+        gsub("_", " ", x = _) |>
+        gsub("\\s+", " ", x = _)
+    ) |>
+    filter(!is.na(species), species != "")
+
 
   return(final_df)
 
