@@ -431,6 +431,24 @@ data_eDNA <- function(token=NULL) {
     filter(!is.na(species), species != "")
 
 
+  names(final_df)[names(final_df) == "year"] <- "year_of_data_collection"
+
+
+  # YEAR OF PUBLICATION
+  library(httr)
+  library(jsonlite)
+
+  url <- "https://api.github.com/repos/NickJeff13/eDNA-for-MPAs/commits?path=data&per_page=1"
+
+  res <- GET(url)
+
+  commit_info <- fromJSON(content(res, "text"))
+
+  commit_date <- format(as.Date(commit_info$commit$committer$date), "%Y")
+
+  final_df$year_of_publication <- commit_date
+
+
   return(final_df)
 
 
