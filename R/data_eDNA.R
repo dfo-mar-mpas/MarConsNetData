@@ -446,7 +446,7 @@ data_eDNA <- function(token=NULL) {
 
   commit_date <- format(as.Date(commit_info$commit$committer$date), "%Y")
 
-  final_df$year_of_publication <- commit_date
+  final_df$year_of_publication <- as.numeric(commit_date)
 
 
   return(final_df)
