@@ -73,5 +73,8 @@
   dataset from the Canada-Nova Scotia Offshore Energy Regulator
   [(CNSOER)](https://cnsoer.ca/renewable-energy/lands-management/governments-designated-offshore-wind-energy-areas).
 
+- [`get_COD_url()`](https://dfo-mar-mpas.github.io/MarConsNetData/reference/get_COD_url.md)
+  : Get Canadian Open Data (COD) resource URL by extension
+
 - [`taxize_data()`](https://dfo-mar-mpas.github.io/MarConsNetData/reference/taxize_data.md)
   : Group species into taxonomic groups

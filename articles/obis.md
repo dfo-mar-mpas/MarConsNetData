@@ -3,6 +3,9 @@
 ``` r
 
 library(MarConsNetData)
+#> Registered S3 method overwritten by 'stars':
+#>   method                  from
+#>   st_interpolate_aw.stars sf
 ```
 
 ``` r
