@@ -19,36 +19,49 @@ export(data_eDNA)
 export(data_geomorphic_units)
 export(data_objectives)
 export(data_planning_areas)
+export(data_rv_strata)
 export(data_wind_energy_areas)
 export(get_COD_url)
 export(taxize_data)
-importFrom(arcpullr,get_layer_by_poly)
-importFrom(arcpullr,get_spatial_layer)
-importFrom(dplyr,bind_rows)
-importFrom(dplyr,group_by)
-importFrom(dplyr,mutate)
-importFrom(dplyr,reframe)
-importFrom(dplyr,select)
-importFrom(httr,GET)
-importFrom(httr,add_headers)
-importFrom(httr,content)
+importFrom(arcpullr,
+  get_layer_by_poly,
+  get_spatial_layer
+)
+importFrom(dplyr,
+  bind_rows,
+  group_by,
+  mutate,
+  reframe,
+  select
+)
+importFrom(httr,
+  GET,
+  add_headers,
+  content
+)
 importFrom(jsonlite,fromJSON)
 importFrom(methods,new)
-importFrom(ncdf4,nc_close)
-importFrom(ncdf4,nc_open)
-importFrom(ncdf4,ncatt_get)
-importFrom(ncdf4,ncvar_get)
+importFrom(ncdf4,
+  nc_close,
+  nc_open,
+  ncatt_get,
+  ncvar_get
+)
 importFrom(rlang,.data)
 importFrom(robis,occurrence)
 importFrom(rvest,read_html)
-importFrom(sf,st_as_sf)
-importFrom(sf,st_bbox)
-importFrom(sf,st_convex_hull)
-importFrom(sf,st_crs)
-importFrom(sf,st_filter)
-importFrom(sf,st_make_valid)
-importFrom(sf,st_read)
-importFrom(sf,st_transform)
+importFrom(sf,
+  st_as_sf,
+  st_bbox,
+  st_convex_hull,
+  st_crs,
+  st_filter,
+  st_make_valid,
+  st_read,
+  st_transform
+)
 importFrom(stars,read_ncdf)
-importFrom(worrms,wm_classification)
-importFrom(worrms,wm_records_name)
+importFrom(worrms,
+  wm_classification,
+  wm_records_name
+)
