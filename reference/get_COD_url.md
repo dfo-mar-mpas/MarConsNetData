@@ -5,7 +5,7 @@ Get Canadian Open Data (COD) resource URL by extension
 ## Usage
 
 ``` r
-get_COD_url(uuid, ext)
+get_COD_url(uuid, ext, silent = FALSE)
 ```
 
 ## Arguments
@@ -18,7 +18,9 @@ get_COD_url(uuid, ext)
 
 - ext:
 
-  desired file extension (e.g., "csv", "json", "xlsx")
+  desired file extension (e.g., "csv", "json", "xlsx") or format
+  (e.g."ESRI REST" for ESRI REST services). The function will search for
+  resources with this extension or format in the specified dataset.
 
 ## Value
 

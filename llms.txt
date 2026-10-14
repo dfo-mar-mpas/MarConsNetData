@@ -95,6 +95,9 @@ bioregion <- data_bioregion()
 - [`data_planning_areas()`](https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_planning_areas.md)
   : Get Marine Spatial Planning Areas Data
 
+- [`data_rv_strata()`](https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_rv_strata.md)
+  : Return the Maritimes RV Strata (summer survey) layer as an sf object
+
 - [`data_wind_energy_areas()`](https://dfo-mar-mpas.github.io/MarConsNetData/reference/data_wind_energy_areas.md)
   :
 
