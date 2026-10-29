@@ -1,8 +1,18 @@
+
 #' Find a layer URL in an ArcGIS REST service by (partial) layer name
 #'
 #' @param service_url character string of the ArcGIS REST service URL (e.g., "https://egisp.dfo-mpo.gc.ca/arcgis/rest/services/open_data_donnees_ouvertes/maritimes_summer_research_vessel_survey_en/MapServer")
 #' @param pattern character string to match against layer names
 #' @param ignore.case logical, whether to ignore case when matching layer names (default: TRUE)
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+#'
+#' rest_url <- get_COD_url(uuid="14d55ea5-b17d-478c-b9ee-6a7c04439d2b","ESRI REST")
+#' clusterlayers_url <- get_esri_layer_url(rest_url, "cluster")
+#' clusters <- arcpullr::get_spatial_layer(clusterlayers_url)
 get_esri_layer_url <- function(service_url, pattern, ignore.case = TRUE) {
   service_url <- sub("/+$", "", service_url)
 

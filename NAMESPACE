@@ -22,6 +22,7 @@ export(data_planning_areas)
 export(data_rv_strata)
 export(data_wind_energy_areas)
 export(get_COD_url)
+export(get_esri_layer_url)
 export(taxize_data)
 importFrom(arcpullr,
   get_layer_by_poly,
