@@ -33,7 +33,6 @@ importFrom(dplyr,
   filter,
   group_by,
   mutate,
-  n,
   reframe,
   select,
   summarise
@@ -69,6 +68,10 @@ importFrom(sf,
   st_transform
 )
 importFrom(stars,read_ncdf)
+importFrom(tidyr,
+  pivot_wider,
+  separate_rows
+)
 importFrom(utils,
   download.file,
   read.csv,

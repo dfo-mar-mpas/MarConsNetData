@@ -18,16 +18,16 @@ data_DFO_sp_lists <- function(status="At-Risk"){
 
   # extract dataframe and unnest variables
   sp_lists <- as.data.frame(jsonlite::fromJSON(json_data)) |>
-    tidyr::unnest(c(data.name,
-                    data.profile.url,
-                    data.avatar,
-                    data.group,
-                    data.region,
-                    data.status),
+    tidyr::unnest(c("data.name",
+                    "data.profile.url",
+                    "data.avatar",
+                    "data.group",
+                    "data.region",
+                    "data.status"),
                   names_sep = "_") |>
-    tidyr::unnest(c(data.status_general,
-                    data.status_sara,
-                    data.status_cosewic),
+    tidyr::unnest(c("data.status_general",
+                    "data.status_sara",
+                    "data.status_cosewic"),
                   names_sep = "_")
 
   if(status=="all"){

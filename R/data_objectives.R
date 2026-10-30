@@ -139,8 +139,8 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
 
   if (area == "Western and Emerald Banks Marine Refuge") {
     if (length(final) == 2) {
-      source(file.path(Sys.getenv("OneDriveCommercial"),"MarConsNetTargets","data", "site_objectives", "webca.R"))
-      final <- c(final, CO3)
+      final <- c(final, "Protect continental shelf habitats and associated benthic and demersal communities")
+      warning("Western and Emerald Banks Marine Refuge objectives are not fully available on the DFO website. The third objective has been added manually.")
     }
   }
 

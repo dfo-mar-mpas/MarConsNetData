@@ -7,7 +7,8 @@
 #' @importFrom worrms wm_records_name
 #' @importFrom worrms wm_classification
 #' @importFrom magrittr %>%
-#' @importFrom dplyr group_by summarise n
+#' @importFrom dplyr group_by summarise
+#' @importFrom tidyr pivot_wider
 #' @export
 
 taxize_data <- function(df=NULL) {
@@ -55,7 +56,7 @@ taxize_data <- function(df=NULL) {
       mutate(lat_rounded = round(lat, 2), lon_rounded = round(lon, 2)) %>%
       group_by(lat_rounded, lon_rounded, subphylum) %>%
       summarise(count = dplyr::n()) %>%
-      pivot_wider(names_from = subphylum, values_from = count, values_fill = 0)
+      pivot_wider(names_from = "subphylum", values_from = "count", values_fill = 0)
     names(DF)[1:2] <- c("lat", "lon")
   } else {
     names(df) <- c("lat", "lon",sKey$group)

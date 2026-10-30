@@ -33,6 +33,8 @@
 #' @importFrom utils read.csv
 #' @importFrom magrittr %>%
 #' @importFrom dplyr group_by summarise filter mutate
+#' @importFrom tidyr separate_rows
+#' @importFrom rlang .data
 #'
 #' @return
 #' A data frame containing:
@@ -374,9 +376,9 @@ data_eDNA <- function(token=NULL) {
             species_and_detections <- data[, c("Species", df$ID[l]), drop = FALSE]
 
             species_unique <- species_and_detections %>%
-              group_by(Species) %>%
+              group_by(.data$Species) %>%
               summarise(detections = sum(.data[[df$ID[l]]]), .groups = "drop") %>%
-              filter(detections > 0)
+              filter(.data$detections > 0)
 
             if (nrow(species_unique) > 0) {
               df$species[l] <- paste0(species_unique$Species, collapse=', ')
@@ -422,10 +424,10 @@ data_eDNA <- function(token=NULL) {
 
 
   final_df <- final_df |>
-    separate_rows(species, detections, sep = ",\\s*") |>
+    separate_rows("species", "detections", sep = ",\\s*") |>
     mutate(
-      detections = as.numeric(detections),
-      species = species |>
+      detections = as.numeric(.data$detections),
+      species = .data$species |>
         tolower() |>
         trimws() |>
         gsub("_", " ", x = _) |>
