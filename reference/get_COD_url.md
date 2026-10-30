@@ -22,6 +22,10 @@ get_COD_url(uuid, ext, silent = FALSE)
   (e.g."ESRI REST" for ESRI REST services). The function will search for
   resources with this extension or format in the specified dataset.
 
+- silent:
+
+  logical, whether to suppress messages (default: FALSE)
+
 ## Value
 
 A character vector of URLs for resources matching the specified
