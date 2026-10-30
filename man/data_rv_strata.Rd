@@ -13,5 +13,7 @@ an sf object of the Maritimes RV Strata (summer survey) layer
 Return the Maritimes RV Strata (summer survey) layer as an sf object
 }
 \examples{
+\dontrun{
 strata <- data_rv_strata()
+}
 }

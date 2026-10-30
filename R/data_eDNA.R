@@ -433,7 +433,7 @@ data_eDNA <- function(token=NULL) {
         gsub("_", " ", x = _) |>
         gsub("\\s+", " ", x = _)
     ) |>
-    filter(!is.na(species), species != "")
+    filter(!is.na(.data$species), .data$species != "")
 
 
   names(final_df)[names(final_df) == "year"] <- "year_of_data_collection"
