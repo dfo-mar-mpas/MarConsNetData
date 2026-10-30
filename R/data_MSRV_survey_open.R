@@ -18,15 +18,19 @@ data_MarRV_survey_open <- function(survey="summer"){
   dir.create(tmpdir)
 
   if(survey=="summer"){
-    download.file("https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/1366e1f1-e2c8-4905-89ae-e10f1be0a164/attachments/SUMMER_csv.zip",tmp)
+    url <- get_COD_url("1366e1f1-e2c8-4905-89ae-e10f1be0a164","zip",silent=TRUE)
+    download.file(url[grepl("csv",url)],tmp)
   }else  if(survey=="4VSW"){
+    url <- get_COD_url("a851ce30-e216-4d7d-a29c-05631eef140e","zip",silent=TRUE)
     download.file("https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/a851ce30-e216-4d7d-a29c-05631eef140e/attachments/4VSW_csv.zip",tmp)
   }else  if(survey=="fall"){
+    url <- get_COD_url("5f82b379-c1e5-4a02-b825-f34fc645a529","zip",silent=TRUE)
     download.file("https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/5f82b379-c1e5-4a02-b825-f34fc645a529/attachments/FALL_csv.zip",tmp)
   }else  if(survey=="spring"){
+    url <- get_COD_url("fecf045a-95a2-4b69-8a40-818649a62716","zip",silent=TRUE)
     download.file("https://api-proxy.edh.azure.cloud.dfo-mpo.gc.ca/catalogue/records/fecf045a-95a2-4b69-8a40-818649a62716/attachments/SPRING_csv.zip",tmp)
   }else if(survey=="summer_strata"){
-    get_spatial_layer("https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Maritimes_Summer_Research_Vessel_Survey_En/MapServer/1")
+    return(data_rv_strata())
   }else{
     warning("Other surveys are not yet functional")
   }

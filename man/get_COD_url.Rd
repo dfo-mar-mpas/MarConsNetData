@@ -10,6 +10,8 @@ get_COD_url(uuid, ext, silent = FALSE)
 \item{uuid}{universally unique identifier of the dataset in the https://open.canada.ca/ portal (e.g., "2d9cce9a-d634-4b49-879f-87c40c52acf2")}
 
 \item{ext}{desired file extension (e.g., "csv", "json", "xlsx") or format (e.g."ESRI REST" for ESRI REST services). The function will search for resources with this extension or format in the specified dataset.}
+
+\item{silent}{logical, whether to suppress messages (default: FALSE)}
 }
 \value{
 A character vector of URLs for resources matching the specified extension.
