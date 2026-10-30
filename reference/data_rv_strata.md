@@ -15,5 +15,7 @@ an sf object of the Maritimes RV Strata (summer survey) layer
 ## Examples
 
 ``` r
+if (FALSE) { # \dontrun{
 strata <- data_rv_strata()
+} # }
 ```
