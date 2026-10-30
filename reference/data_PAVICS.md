@@ -7,8 +7,7 @@ Get data from [PAVICS](NA) THREDDS
 
 ``` r
 data_PAVICS(
-  OPENDAP_url =
-    "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml",
+  OPENDAP_url = .pavics_default_url,
   first_date = "1950-01-01",
   end_date = "1951-01-1",
   variable = "tas",
@@ -66,8 +65,7 @@ require(dplyr)
 ssbof <- data_planning_areas()
 
 # get CMIP6 data dor Near-Surface Air Temperature (tas)
-climate <- data_PAVICS(OPENDAP_url = "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml",
-                       first_date = "1950-01-01",
+climate <- data_PAVICS(first_date = "1950-01-01",
                        end_date = "1950-03-1",
                        variable = "tas",
                        geom = ssbof,
