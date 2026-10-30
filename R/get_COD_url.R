@@ -7,6 +7,7 @@
 #' @returns A character vector of URLs for resources matching the specified extension.
 #'
 #' @export
+#' @importFrom utils read.csv
 #'
 #' @examples
 #' url <- get_COD_url("2d9cce9a-d634-4b49-879f-87c40c52acf2", "csv")

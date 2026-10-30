@@ -17,7 +17,8 @@ Data is from the csv files on https://open.canada.ca/data/en/dataset/8ddcaeea-b8
 }
 \examples{
 summer <- data_MarRV_survey_open()
-
+\dontrun{
 fall <- data_MarRV_survey_open(survey="fall")
+}
 
 }

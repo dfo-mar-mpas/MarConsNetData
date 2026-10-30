@@ -4,6 +4,7 @@
 #' @returns An sf object containing the Wind Energy Areas (WEA) dataset.
 #'
 #' @export
+#' @importFrom utils download.file unzip
 #' @examples
 #' \dontrun{
 #' wea <- data_wind_energy_areas()

@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' stAnnsBankObjectives <- data_objectives(type="site", area="st_Anns_Bank_MPA")
+#' stAnnsBankObjectives <- data_objectives(type="site", area="St. Anns Bank Marine Protected Area")
 #' }
 #'
 #' @return a "sf" "dataframe" object
@@ -40,11 +40,11 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
         u <- "laurentian-laurentien"
       } else if (area == "Gully Marine Protected Area") {
         u <- "gully"
-      } else if (area =="Banc-des-Américains Marine Protected Area") {
+      } else if (area =="Banc-des-Am\u00e9ricains Marine Protected Area") {
         u <- "american-americains"
       } else if (area == "Basin Head Marine Protected Area") {
         u <- "basin-head"
-      } else if (area == "Eastport – Round Island Marine Protected Area") {
+      } else if (area == "Eastport \u2013 Round Island Marine Protected Area") {
         u <- "eastport"
       } else if (area == "Gilbert Bay Marine Protected Area") {
         u <- "gilbert"
@@ -87,7 +87,7 @@ data_objectives <- function(type=NULL, area="St. Anns Bank Marine Protected Area
     }
 
     # Unique for bansDesAmericains
-    if (area == "Banc-des-Américains Marine Protected Area") {
+    if (area == "Banc-des-Am\u00e9ricains Marine Protected Area") {
       minLine <- which(lines[[1]] == "    <p>The conservation objectives for the Banc-des-Am\u00e9ricains Marine Protected are to:</p>\r")+2
       maxLine <- which(grepl("These objectives promote", lines[[1]]))-2
     }

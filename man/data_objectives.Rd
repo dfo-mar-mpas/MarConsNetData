@@ -26,7 +26,7 @@ Canadian protected and conserved areas in the Scotian Shelf bio region.
 }
 \examples{
 \dontrun{
-stAnnsBankObjectives <- data_objectives(type="site", area="st_Anns_Bank_MPA")
+stAnnsBankObjectives <- data_objectives(type="site", area="St. Anns Bank Marine Protected Area")
 }
 
 }

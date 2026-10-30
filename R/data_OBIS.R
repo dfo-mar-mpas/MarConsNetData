@@ -11,6 +11,7 @@
 #' @importFrom robis occurrence
 #' @importFrom dplyr mutate bind_rows select
 #' @importFrom sf st_as_sf st_filter
+#' @importFrom rlang :=
 #' @examples
 #' \dontrun{
 #' bioregion <- data_bioregion()

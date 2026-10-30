@@ -6,11 +6,13 @@
 #'
 #' @return list of data.frames or sf data.frame
 #' @export
+#' @importFrom utils download.file unzip read.csv
 #'
 #' @examples
 #' summer <- data_MarRV_survey_open()
-#'
+#' \dontrun{
 #' fall <- data_MarRV_survey_open(survey="fall")
+#' }
 #'
 data_MarRV_survey_open <- function(survey="summer"){
   tmp <- tempfile()

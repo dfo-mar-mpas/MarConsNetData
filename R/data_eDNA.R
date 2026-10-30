@@ -30,6 +30,9 @@
 #' clicking 'Generate New Token'
 #' @importFrom httr GET add_headers
 #' @importFrom jsonlite fromJSON
+#' @importFrom utils read.csv
+#' @importFrom magrittr %>%
+#' @importFrom dplyr group_by summarise filter mutate
 #'
 #' @return
 #' A data frame containing:
@@ -435,8 +438,6 @@ data_eDNA <- function(token=NULL) {
 
 
   # YEAR OF PUBLICATION
-  library(httr)
-  library(jsonlite)
 
   url <- "https://api.github.com/repos/NickJeff13/eDNA-for-MPAs/commits?path=data&per_page=1"
 

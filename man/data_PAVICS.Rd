@@ -14,7 +14,10 @@ data_PAVICS(
 )
 }
 \arguments{
-\item{OPENDAP_url}{character string for an OPENDAP url from the THREDDS \href{https://pavics.ouranos.ca/thredds/catalog.html}{catalog}. Defaults to a \href{"https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/datasets/simulations/RCM-CMIP6/CORDEX/NAM-12/day/NAM-12_NorESM2-MM_historical_r1i1p1f1_OURANOS_CRCM5_v1-r1_day_19500101-20141231.ncml"}{RCM-CMIP6} daily simulation}
+\item{OPENDAP_url}{character string for an OPENDAP url from the THREDDS
+\href{https://pavics.ouranos.ca/thredds/catalog.html}{catalog}. Defaults to the
+NAM-12 NorESM2-MM historical RCM-CMIP6 daily simulation
+(see \code{.pavics_default_url}).}
 
 \item{first_date}{character string for the first date to be included in the data subset. Defaults to "1950-01-01"}
 
@@ -30,7 +33,7 @@ data_PAVICS(
 matrix
 }
 \description{
-Get data from \href{"https://pavics.ouranos.ca/index.html"}{PAVICS} THREDDS \href{https://pavics.ouranos.ca/thredds/catalog.html}{catalog}
+Get data from \href{https://pavics.ouranos.ca/index.html}{PAVICS} THREDDS \href{https://pavics.ouranos.ca/thredds/catalog.html}{catalog}
 }
 \examples{
 \dontrun{
