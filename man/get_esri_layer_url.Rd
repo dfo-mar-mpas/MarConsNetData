@@ -19,6 +19,6 @@ Find a layer URL in an ArcGIS REST service by (partial) layer name
 \examples{
 
 rest_url <- get_COD_url(uuid="14d55ea5-b17d-478c-b9ee-6a7c04439d2b","ESRI REST")
-clusterlayers_url <- get_esri_layer_url(rest_url, "cluster")
+clusterlayers_url <- get_esri_layer_url(rest_url[1], "cluster")
 clusters <- arcpullr::get_spatial_layer(clusterlayers_url)
 }
