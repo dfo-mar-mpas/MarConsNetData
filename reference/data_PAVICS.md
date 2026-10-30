@@ -1,6 +1,6 @@
 # Get climate data
 
-Get data from [PAVICS](NA) THREDDS
+Get data from [PAVICS](https://pavics.ouranos.ca/index.html) THREDDS
 [catalog](https://pavics.ouranos.ca/thredds/catalog.html)
 
 ## Usage
@@ -22,7 +22,8 @@ data_PAVICS(
 
   character string for an OPENDAP url from the THREDDS
   [catalog](https://pavics.ouranos.ca/thredds/catalog.html). Defaults to
-  a [RCM-CMIP6](NA) daily simulation
+  the NAM-12 NorESM2-MM historical RCM-CMIP6 daily simulation (see
+  `.pavics_default_url`).
 
 - first_date:
 

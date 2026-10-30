@@ -36,6 +36,6 @@ a "sf" "dataframe" object
 
 ``` r
 if (FALSE) { # \dontrun{
-stAnnsBankObjectives <- data_objectives(type="site", area="st_Anns_Bank_MPA")
+stAnnsBankObjectives <- data_objectives(type="site", area="St. Anns Bank Marine Protected Area")
 } # }
 ```

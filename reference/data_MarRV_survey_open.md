@@ -25,6 +25,7 @@ list of data.frames or sf data.frame
 
 ``` r
 summer <- data_MarRV_survey_open()
-
+if (FALSE) { # \dontrun{
 fall <- data_MarRV_survey_open(survey="fall")
+} # }
 ```
